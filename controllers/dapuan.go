@@ -2,142 +2,144 @@ package controllers
 
 import (
 	"net/http"
+
 	"../structs"
 	"github.com/gin-gonic/gin"
 )
-type dapuanJSON struct{
-	dapuan string `json:"nama"`
-	orangId uint `json:"orangId"`
-	grupId uint `json:"grupId"`
-	keterangan string `json:"poster"`
+
+type dapuanJSON struct {
+	Dapuan  string `json:"nama" form:"nama"`
+	OrangId uint   `json:"orangId" form:"orangId"`
+	GrupId  uint   `json:"grupId" form:"grupId"`
 }
 
-func (idb *InDB) GetDapuan(c *gin.Context){
+func (idb *InDB) GetDapuan(c *gin.Context) {
 	var (
 		dapuan []structs.Dapuan
 		result gin.H
 	)
-	idb.DB.Find(&dapuan)
+	idb.DB.Preload("Grup").Preload("Orang").Find(&dapuan)
 
-	if len(dapuan)<0{
+	if len(dapuan) < 0 {
 		result = gin.H{
-			"status" : "Not Found",
-			"count" : 0,
-			"result" : gin.H{
-				"dapuan" : dapuan,
+			"status": "Not Found",
+			"count":  0,
+			"result": gin.H{
+				"dapuan": dapuan,
 			},
 		}
-	}else{
+	} else {
 		result = gin.H{
-			"status" : "OK",
-			"count" : len(dapuan),
-			"result" : gin.H{
-				"dapuan" : dapuan,
+			"status": "OK",
+			"count":  len(dapuan),
+			"result": gin.H{
+				"dapuan": dapuan,
 			},
 		}
 	}
 	c.JSON(http.StatusOK, result)
 }
 
-func (idb *InDB) GetDapuanById(c *gin.Context){
+func (idb *InDB) GetDapuanById(c *gin.Context) {
 	var (
 		dapuan structs.Dapuan
 		result gin.H
 	)
 	id := c.Param("id")
+	err := idb.DB.Where("id = ?", id).Preload("Orang").Preload("Grup").First(&dapuan).Error
 
-	err := idb.DB.Where("id = ?", id).First(&dapuan).Error
-
-	if err!= nil{
+	if err != nil {
 		result = gin.H{
-			"status" : "Not Found",
-			"error" : err,
+			"status": "Not Found",
+			"error":  err,
 		}
-	}else{
+	} else {
 		result = gin.H{
-			"status" : "ok",
-			"count" : 1,
-			"result" : dapuan,
+			"status": "ok",
+			"count":  1,
+			"result": dapuan,
 		}
 	}
 	c.JSON(http.StatusOK, result)
 }
 
-func (idb * InDB) CreateDapuan(c *gin.Context){
+func (idb *InDB) CreateDapuan(c *gin.Context) {
 	var (
 		result gin.H
 		dapuan structs.Dapuan
-		data dapuanJSON
+		data   dapuanJSON
 	)
-	if err:= c.ShouldBindJSON(&data); err != nil{
+	if err := c.ShouldBind(&data); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error" : err.Error(),
+			"error": err.Error(),
 		})
-	}else{
-	
-		dapuan.Dapuan = data.dapuan
-		dapuan.OrangID = data.orangId
-		dapuan.GrupID = data.grupId
-		dapuan.Keterangan = data.keterangan
+	} else {
 
-		
+		dapuan.Dapuan = data.Dapuan
+		dapuan.OrangID = data.OrangId
+		idb.DB.First(&dapuan.Orang, dapuan.OrangID)
+		dapuan.GrupID = data.GrupId
+		idb.DB.First(&dapuan.Grup, dapuan.GrupID)
+
 		idb.DB.Create(&dapuan)
 		result = gin.H{
-			"status" : "ok",
-			"result" : dapuan,
+			"status": "ok",
+			"result": dapuan,
 		}
-		
+
 		c.JSON(http.StatusOK, result)
 	}
 }
 
-func (idb *InDB) UpdateDapuan( c *gin.Context){
+func (idb *InDB) UpdateDapuan(c *gin.Context) {
 	var (
-		result gin.H
+		result     gin.H
 		dapuanLama structs.Dapuan
 		dapuanBaru structs.Dapuan
-		data dapuanJSON
+		data       dapuanJSON
 	)
-	if err := c.ShouldBindJSON(&data); err != nil{
+	if err := c.ShouldBind(&data); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-	}else{
+	} else {
 		id := c.Param("id")
-		err := idb.DB.First(&dapuanLama, id).Error
-		if err != nil{
+		err := idb.DB.First(&dapuanBaru, id).Error
+		if err != nil {
 			result = gin.H{
 				"status": "failed",
-				"result" : "Data Not Found",
-				"errors" : err,
+				"result": "Data Not Found",
+				"errors": err,
 			}
-		}else{
-			dapuanBaru.Dapuan = data.dapuan
-			dapuanBaru.OrangID = data.orangId
-			dapuanBaru.GrupID = data.grupId
-			dapuanBaru.Keterangan = data.keterangan
+		} else {
+			dapuanLama = dapuanBaru
+			dapuanBaru.Dapuan = data.Dapuan
+			dapuanBaru.OrangID = data.OrangId
+			idb.DB.First(&dapuanBaru.Orang, dapuanBaru.OrangID)
+			dapuanBaru.GrupID = data.GrupId
+			idb.DB.First(&dapuanBaru.Grup, dapuanBaru.GrupID)
 
-			errs := idb.DB.Model(&dapuanLama).Updates(dapuanBaru).Error
-			
-			if errs != nil{
+			// errs := idb.DB.Model(&dapuanLama).Updates(dapuanBaru).Error
+			errs := idb.DB.Save(&dapuanBaru).Error
+			if errs != nil {
 				result = gin.H{
-					"status" : "Failed",
-					"result" : "failed update",
-					"error" : errs,
+					"status": "Failed",
+					"result": "failed update",
+					"error":  errs,
 				}
-			}else{
-				result  = gin.H{
+			} else {
+				result = gin.H{
 					"status": "OK",
-					"result" : dapuanBaru,
+					"before": dapuanLama,
+					"result": dapuanBaru,
 				}
 			}
-		
-			
-			c.JSON(http.StatusOK, result)
+
 		}
 
 	}
+	c.JSON(http.StatusOK, result)
 }
 
-func (idb *InDB) DeleteDapuan(c *gin.Context){
+func (idb *InDB) DeleteDapuan(c *gin.Context) {
 	var (
 		dapuan structs.Dapuan
 		result gin.H
@@ -146,23 +148,22 @@ func (idb *InDB) DeleteDapuan(c *gin.Context){
 
 	err := idb.DB.First(&dapuan, id).Error
 
-	if err != nil{
+	if err != nil {
 		result = gin.H{
-			"status" : "Not Found",
-			"result" : "Data Not Found",
+			"status": "Not Found",
+			"result": "Data Not Found",
 		}
-	}else{
+	} else {
 		errs := idb.DB.Delete(&dapuan).Error
-		if errs != nil{
+		if errs != nil {
 			result = gin.H{
 				"status": "Failed",
-				"result" : "Failed to Delete Data",
+				"result": "Failed to Delete Data",
 			}
-		}else{
+		} else {
 			result = gin.H{
-				"status" : "ok",
-				"result" : "data with id :"+ id + " deleted successfully",
-
+				"status": "ok",
+				"result": "data with id :" + id + " deleted successfully",
 			}
 		}
 	}

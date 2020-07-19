@@ -1,0 +1,264 @@
+{
+    "/instansi/all": {
+      "get": {
+        "tags": [
+          "instansi"
+        ],
+        "summary": "Fetch data semua instansi JM",
+        "description": "",
+        "operationId": "FetchInstansi",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+         
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Instansi"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:instansi",
+              "read:instansi"
+            ]
+          }
+        ]
+      }
+    },
+    "/instansi/byId/{id}": {
+      "get": {
+        "tags": [
+          "instansi"
+        ],
+        "summary": "Fetch data semua instansi JM berdasarkan id",
+        "description": "",
+        "operationId": "FetchInstansi",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Instansi"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:instansi",
+              "read:instansi"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "instansi"
+        ],
+        "summary": "Delete data semua instansi JM berdasarkan id",
+        "description": "",
+        "operationId": "DeleteInstansi",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Pet object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Instansi"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Instansi"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:instansi",
+              "read:instansi"
+            ]
+          }
+        ]
+      }
+    },
+    "/instansi/create": {
+      "post": {
+        "tags": [
+          "instansi"
+        ],
+        "summary": "Add data instansi JM",
+        "description": "",
+        "operationId": "AddInstansi",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Instansi object that needs to be added to db",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Instansi"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:instansi",
+              "read:instansi"
+            ]
+          }
+        ]
+    },
+    "/instansi/update/{id}": {
+      "put": {
+        "tags": [
+          "instansi"
+        ],
+        "summary": "Update data instansi JM",
+        "description": "",
+        "operationId": "UpdateInstansi",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Instansi object that needs to be added to db",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Instansi"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:instansi",
+              "read:instansi"
+            ]
+          }
+        ]
+    },
+    "/instansi/{id}": {
+      "delete": {
+        "tags": [
+          "instansi"
+        ],
+        "summary": "delete data semua instansi JM",
+        "description": "",
+        "operationId": "DeleteInstansi",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:instansi",
+              "read:instansi"
+            ]
+          }
+        ]
+      }
+    }
+}  

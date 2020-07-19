@@ -2,114 +2,118 @@ package controllers
 
 import (
 	"net/http"
+
 	"../structs"
 	"github.com/gin-gonic/gin"
 )
 
-
-type dataGroup struct{
-	Nama string `json:"nama"`
-	Masjid string `json:"masjid"`
-	Masjid_lang float64 `json:"masjid_lang"`
-	Masjid_lat float64 `json:"masjid_lat"`
-	Alamat string `json:"alamat"`
-	Group_type int `json:"group_type"`
-	ParentId uint `json:"parentId"`
+type dataGroup struct {
+	Nama        string  `json:"nama" form:"nama"`
+	Masjid      string  `json:"masjid" form:"masjid"`
+	Masjid_lang float64 `json:"masjid_lang" form:"masjid_lang"`
+	Masjid_lat  float64 `json:"masjid_lat" form:"masjid_lat"`
+	Alamat      string  `json:"alamat" form:"alamat"`
+	Group_type  string  `json:"group_type" form:"group_type"`
+	ParentId    uint    `json:"parentId" form:"parentId"`
 }
-func (idb *InDB) GetGroup( c *gin.Context){
+
+func (idb *InDB) GetGroup(c *gin.Context) {
 	var (
 		result gin.H
-		grup []structs.Group
+		grup   []structs.Group
 	)
 
-	idb.DB.Find(&grup)
-	if len(grup)<=0{
+	idb.DB.Preload("Parent_group").Find(&grup)
+	if len(grup) > 0 {
 		result = gin.H{
-			"status" : "ok",
-			"result" : grup,
+			"status": "ok",
+			"result": grup,
 		}
-	}	else{
+	} else {
 		result = gin.H{
-			"status" : "Not Found",
-			"result" : result,
+			"status": "Not Found",
+			"result": result,
 		}
 	}
 	c.JSON(http.StatusOK, result)
 }
 
-func (idb *InDB) GetGroupByID(c *gin.Context){
+func (idb *InDB) GetGroupByID(c *gin.Context) {
 	var (
 		grup structs.Group
-		res gin.H
+		res  gin.H
 	)
 	id := c.Param("id")
 
-	err := idb.DB.First(&grup,id).Error
+	err := idb.DB.Where("id = ? ", id).Preload("Parent_group").First(&grup).Error
 
-	if err!=nil{
-		res = notFound()
-	}else{
+	if err != nil {
+		res = notFound(gin.H{
+			"err": err,
+		})
+	} else {
 		res = gin.H{
 			"status": "ok",
-			"result" : res,
+			"result": grup,
 		}
 	}
+	c.JSON(http.StatusOK, res)
 }
-func (idb *InDB) GetGroupByType(c *gin.Context){
+func (idb *InDB) GetGroupByType(c *gin.Context) {
 	var (
-		grup []structs.Group
+		grup   []structs.Group
 		result gin.H
 	)
 	group_type := c.Param("type")
 
 	idb.DB.Where("Group_type = ?", group_type).Find(&grup)
 
-	if len(grup)<=0{
+	if len(grup) > 0 {
 		result = gin.H{
-			"status" : "ok",
-			"result" : grup,
+			"status": "ok",
+			"result": grup,
 		}
-	}	else{
+	} else {
 		result = gin.H{
-			"status" : "Not Found",
-			"result" : result,
+			"status": "Not Found",
+			"result": grup,
 		}
 	}
 	c.JSON(http.StatusOK, result)
 }
-func (idb *InDB) GetGroupByParentId(c *gin.Context){
+func (idb *InDB) GetGroupByParentId(c *gin.Context) {
 	var (
-		grup []structs.Group
+		grup   []structs.Group
 		result gin.H
 	)
 	id := c.Param("id")
 
 	idb.DB.Where("ParentID = ?", id).Find(&grup)
 
-	if len(grup)<=0{
+	if len(grup) <= 0 {
 		result = gin.H{
-			"status" : "ok",
-			"result" : grup,
+			"status": "ok",
+			"result": grup,
 		}
-	}	else{
+	} else {
 		result = gin.H{
-			"status" : "Not Found",
-			"result" : result,
+			"status": "Not Found",
+			"result": result,
 		}
 	}
 	c.JSON(http.StatusOK, result)
 }
-func (idb *InDB) CreateGroup(c *gin.Context){
+func (idb *InDB) CreateGroup(c *gin.Context) {
 	var (
-		res gin.H
+		res  gin.H
 		data dataGroup
 		grup structs.Group
 	)
 
-	if err:= c.ShouldBindJSON(&data); err !=nil{
-		c.JSON(http.StatusBadRequest,gin.H{
-			"status" : "bad request",
-			"error": err,
+	if err := c.ShouldBind(&data); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"status": "bad request",
+			"error":  err,
 		})
 	}
 	grup.Nama = data.Nama
@@ -119,93 +123,105 @@ func (idb *InDB) CreateGroup(c *gin.Context){
 	grup.Alamat = data.Alamat
 	grup.Group_type = data.Group_type
 	grup.ParentID = data.ParentId
-	
-	idb.DB.Create(&grup)
-	res = gin.H{
-		"status" : "OK",
-		"result" : grup,
-		
+
+	errs := idb.DB.Create(&grup).Error
+
+	if errs != nil {
+		res = gin.H{
+			"status": "failed",
+			"result": errs,
+		}
+	} else {
+		res = gin.H{
+			"status": "OK",
+			"result": grup,
+		}
 	}
+
 	c.JSON(http.StatusOK, res)
 }
-func (idb *InDB) UpdateGroup(c *gin.Context){
+func (idb *InDB) UpdateGroup(c *gin.Context) {
 	var (
 		grup structs.Group
 		lama structs.Group
 		data dataGroup
-		res gin.H
+		res  gin.H
 	)
 
-	if err := c.ShouldBindJSON(&data); err != nil{
+	if err := c.ShouldBind(&data); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"status": "bad request",
 		})
 	}
-	grup.Nama = data.Nama
-	grup.Masjid = data.Masjid
-	grup.Masjid_lang = data.Masjid_lang
-	grup.Masjid_lat = data.Masjid_lat
-	grup.Alamat = data.Alamat
-	grup.Group_type = data.Group_type
-	grup.ParentID = data.ParentId
+	id := c.Param("id")
 
-	err := idb.DB.First(&lama).Error
+	errs := idb.DB.Where("id = ? ", id).First(&grup).Error
 
-	if err != nil{
+	if errs != nil {
 		res = gin.H{
-			"status" : "Data Not Found",
-			"error" : err,
+			"status": "Data Not Found",
+			"error":  errs,
 		}
-	}else{
-		err = idb.DB.Model(&lama).Updates(grup).Error
-		if err != nil{
+	} else {
+		lama = grup
+		grup.Nama = data.Nama
+		grup.Masjid = data.Masjid
+		grup.Masjid_lang = data.Masjid_lang
+		grup.Masjid_lat = data.Masjid_lat
+		grup.Alamat = data.Alamat
+		grup.Group_type = data.Group_type
+		grup.ParentID = data.ParentId
+		errss := idb.DB.Save(grup).Error
+		if errss != nil {
 			res = gin.H{
-				"status" : "Data Not Found",
-				"error" : err,
-			}	
-		}else{
+				"status": "UpdateFailed",
+				"error":  errss,
+			}
+		} else {
 			res = gin.H{
-				"status" : "ok",
-				"result" : "data updated",
-				"data" : grup,
+				"status": "ok",
+				"result": "data updated",
+				"before": lama,
+				"data":   grup,
 			}
 		}
-		
+
 	}
-	c.JSON(http.StatusOK, res) 
+	c.JSON(http.StatusOK, res)
 }
-func (idb *InDB) DeleteGroup(c *gin.Context){
+func (idb *InDB) DeleteGroup(c *gin.Context) {
 	var (
 		grup structs.Group
-		res gin.H
+		res  gin.H
 	)
 	id := c.Param("id")
-	err := idb.DB.First(&grup,id).Error
+	err := idb.DB.Where("id = ? ", id).First(&grup).Error
 
-	if err != nil{
-		res = notFound();
-	}else{
-
+	if err != nil {
+		res = notFound(gin.H{
+			"err": err,
+		})
+	} else {
 		err = idb.DB.Delete(&grup).Error
-		if err != nil{
+		if err != nil {
 			res = gin.H{
-				"status" : "failed to delete",
-				"result" : "error",
-				"error" : err,
+				"status": "failed to delete",
+				"result": "error",
+				"error":  err,
 			}
-		}else{
+		} else {
 			res = gin.H{
-				"status" : "ok",
-				"result" : "data deleted successfully",
-				"error" : err,
+				"status": "ok",
+				"result": "data deleted successfully",
+				"error":  err,
 			}
 		}
 	}
 	c.JSON(http.StatusOK, res)
 }
-func notFound() gin.H{
+func notFound(dor gin.H) gin.H {
 	return gin.H{
-		"status" : "Not Found",
-		"result" : gin.H{},
+		"status": "Not Found",
+		"result": dor,
 	}
 }

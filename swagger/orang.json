@@ -1,0 +1,264 @@
+{
+      "/orang/all": {
+        "get": {
+          "tags": [
+            "orang"
+          ],
+          "summary": "Fetch data semua orang JM",
+          "description": "",
+          "operationId": "FetchOrang",
+          "consumes": [
+            "application/json",
+            "application/xml"
+          ],
+          "produces": [
+            "application/xml",
+            "application/json"
+          ],
+          "parameters": [
+           
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Orang"
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid status value"
+            }
+          },
+          "security": [
+            {
+              "banbar_auth": [
+                "write:orang",
+                "read:orang"
+              ]
+            }
+          ]
+        }
+      },
+      "/orang/byId/{id}": {
+        "get": {
+          "tags": [
+            "orang"
+          ],
+          "summary": "Fetch data semua orang JM berdasarkan id",
+          "description": "",
+          "operationId": "FetchOrang",
+          "consumes": [
+            "application/json",
+            "application/xml"
+          ],
+          "produces": [
+            "application/xml",
+            "application/json"
+          ],
+          "parameters": [
+            
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "object",
+                "items": {
+                  "$ref": "#/definitions/Orang"
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid status value"
+            }
+          },
+          "security": [
+            {
+              "banbar_auth": [
+                "write:orang",
+                "read:orang"
+              ]
+            }
+          ]
+        },
+        "delete": {
+          "tags": [
+            "orang"
+          ],
+          "summary": "Delete data semua orang JM berdasarkan id",
+          "description": "",
+          "operationId": "DeleteOrang",
+          "consumes": [
+            "application/json",
+            "application/xml"
+          ],
+          "produces": [
+            "application/xml",
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Pet object that needs to be added to the store",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Orang"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "object",
+                "items": {
+                  "$ref": "#/definitions/Orang"
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid status value"
+            }
+          },
+          "security": [
+            {
+              "banbar_auth": [
+                "write:orang",
+                "read:orang"
+              ]
+            }
+          ]
+        }
+      },
+      "/orang/create": {
+        "post": {
+          "tags": [
+            "orang"
+          ],
+          "summary": "Add data orang JM",
+          "description": "",
+          "operationId": "AddOrang",
+          "consumes": [
+            "application/json",
+            "application/xml"
+          ],
+          "produces": [
+            "application/xml",
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Orang object that needs to be added to db",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Orang"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+              }
+            },
+            "400": {
+              "description": "Invalid status value"
+            }
+          },
+          "security": [
+            {
+              "banbar_auth": [
+                "write:orang",
+                "read:orang"
+              ]
+            }
+          ]
+      },
+      "/orang/update/{id}": {
+        "put": {
+          "tags": [
+            "orang"
+          ],
+          "summary": "Update data orang JM",
+          "description": "",
+          "operationId": "UpdateOrang",
+          "consumes": [
+            "application/json",
+            "application/xml"
+          ],
+          "produces": [
+            "application/xml",
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Orang object that needs to be added to db",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Orang"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+              }
+            },
+            "400": {
+              "description": "Invalid status value"
+            }
+          },
+          "security": [
+            {
+              "banbar_auth": [
+                "write:orang",
+                "read:orang"
+              ]
+            }
+          ]
+      },
+      "/orang/{id}": {
+        "delete": {
+          "tags": [
+            "orang"
+          ],
+          "summary": "delete data semua orang JM",
+          "description": "",
+          "operationId": "DeleteOrang",
+          "consumes": [
+            "application/json",
+            "application/xml"
+          ],
+          "produces": [
+            "application/xml",
+            "application/json"
+          ],
+          "parameters": [
+            
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+            },
+            "400": {
+              "description": "Invalid status value"
+            }
+          },
+          "security": [
+            {
+              "banbar_auth": [
+                "write:orang",
+                "read:orang"
+              ]
+            }
+          ]
+        }
+      }
+}  

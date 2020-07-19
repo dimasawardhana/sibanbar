@@ -1,0 +1,2392 @@
+    {
+    "swagger": "2.0",
+    "info": {
+        "description": "API For Sistem Informasi PPG Bandung Barat, Semoga Allah paringi lancar dan barokah",
+        "version": "1.0.0",
+        "title": "API DOC SI Bandung Barat",
+        "termsOfService": "not yet available",
+        "contact": {
+        "email": "dimasawardhana@gmail.com"
+        },
+        "license": {
+        "name": "Apache 2.0",
+        "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "host": "petstore.swagger.io",
+    "basePath": "/api/v1.0/",
+    "tags": [
+        {
+        "name": "orang",
+        "description": "Detail Tentang JM",
+        "externalDocs": {
+            "description": "No Comment Dulu, tapi siapa tau perlu hehe",
+            "url": ""
+        }
+        },
+        {
+        "name": "user",
+        "description": "Kredensial untuk tiap jm",
+        "externalDocs": {
+            "description": "No Comment Dulu, tapi siapa tau perlu hehe",
+            "url": ""
+        }
+        },
+        {
+        "name": "group",
+        "description": "Detail Tentang Daerah Desa dan Kelompok",
+        "externalDocs": {
+            "description": "No Comment Dulu, tapi siapa tau perlu hehe",
+            "url": ""
+        }
+        },
+        {
+        "name": "event",
+        "description": "Detail Tentang Event",
+        "externalDocs": {
+            "description": "No Comment Dulu, tapi siapa tau perlu hehe",
+            "url": ""
+        }
+        },
+        {
+        "name": "kehadiran",
+        "description": "Cek Kehadiran Event",
+        "externalDocs": {
+            "description": "No Comment Dulu, tapi siapa tau perlu hehe",
+            "url": ""
+        }
+        },
+        {
+        "name": "relationship",
+        "description": "Detail Tentang Hubungan antar JM",
+        "externalDocs": {
+            "description": "No Comment Dulu, tapi siapa tau perlu hehe",
+            "url": ""
+        }
+        },
+        {
+        "name": "kesibukan",
+        "description": "Detail Tentang Kesibukan JM",
+        "externalDocs": {
+            "description": "No Comment Dulu, tapi siapa tau perlu hehe",
+            "url": ""
+        }
+        },
+        {
+        "name": "dapuan",
+        "description": "Detail Tentang Dapuan JM",
+        "externalDocs": {
+            "description": "No Comment Dulu, tapi siapa tau perlu hehe",
+            "url": ""
+        }
+        },
+        {
+        "name": "instansi",
+        "description": "Detail instansi ",
+        "externalDocs": {
+            "description": "Find out more about our store",
+            "url": "http://swagger.io"
+        }
+        }
+    ],
+    "schemes": [
+        "https",
+        "http"
+    ],
+    "paths": {
+        "/orang/all": {
+            "get": {
+            "tags": [
+                "orang"
+            ],
+            "summary": "Fetch data semua orang JM",
+            "description": "",
+            "operationId": "FetchOrang",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+            
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation",
+                "schema": {
+                    "type": "array",
+                    "items": {
+                    "$ref": "#/definitions/Orang"
+                    }
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:orang",
+                    "read:orang"
+                ]
+                }
+            ]
+            }
+        },
+        "/orang/byId/{id}": {
+            "get": {
+            "tags": [
+                "orang"
+            ],
+            "summary": "Fetch data semua orang JM berdasarkan id",
+            "description": "",
+            "operationId": "FetchOrang",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation",
+                "schema": {
+                    "type": "object",
+                    "items": {
+                    "$ref": "#/definitions/Orang"
+                    }
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:orang",
+                    "read:orang"
+                ]
+                }
+            ]
+            }
+        },
+        "/orang/create": {
+            "post": {
+            "tags": [
+                "orang"
+            ],
+            "summary": "Add data orang JM",
+            "description": "",
+            "operationId": "AddOrang",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                {
+                "in": "body",
+                "name": "body",
+                "description": "Orang object that needs to be added to db",
+                "required": true,
+                "schema": {
+                    "$ref": "#/definitions/Orang"
+                }
+                }
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation"
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:orang",
+                    "read:orang"
+                ]
+                }
+            ]
+        },
+        "/orang/update/{id}": {
+            "put": {
+            "tags": [
+                "orang"
+            ],
+            "summary": "Update data orang JM",
+            "description": "",
+            "operationId": "UpdateOrang",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                {
+                "in": "body",
+                "name": "body",
+                "description": "Orang object that needs to be added to db",
+                "required": true,
+                "schema": {
+                    "$ref": "#/definitions/Orang"
+                }
+                }
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation"
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:orang",
+                    "read:orang"
+                ]
+                }
+            ]
+        },
+        "/orang/{id}": {
+            "delete": {
+            "tags": [
+                "orang"
+            ],
+            "summary": "delete data semua orang JM",
+            "description": "",
+            "operationId": "DeleteOrang",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation",
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:orang",
+                    "read:orang"
+                ]
+                }
+            ]
+            }
+        },
+        "/group/all": {
+            "get": {
+            "tags": [
+                "group"
+            ],
+            "summary": "Fetch data semua group JM",
+            "description": "",
+            "operationId": "FetchOrang",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+            
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation",
+                "schema": {
+                    "type": "array",
+                    "items": {
+                    "$ref": "#/definitions/Orang"
+                    }
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:group",
+                    "read:group"
+                ]
+                }
+            ]
+            }
+        },
+        "/group/byId/{id}": {
+            "get": {
+            "tags": [
+                "group"
+            ],
+            "summary": "Fetch data semua group JM berdasarkan id",
+            "description": "",
+            "operationId": "FetchOrang",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation",
+                "schema": {
+                    "type": "object",
+                    "items": {
+                    "$ref": "#/definitions/Orang"
+                    }
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:group",
+                    "read:group"
+                ]
+                }
+            ]
+            }
+        },
+        "/group/byType/{id}": {
+            "get": {
+            "tags": [
+                "group"
+            ],
+            "summary": "Fetch data semua group JM berdasarkan tipe",
+            "description": "",
+            "operationId": "FetchOrangType",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation",
+                "schema": {
+                    "type": "array",
+                    "items": {
+                    "$ref": "#/definitions/Orang"
+                    }
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:group",
+                    "read:group"
+                ]
+                }
+            ]
+            }
+        },
+        "/group/byParentId/{id}": {
+            "get": {
+            "tags": [
+                "group"
+            ],
+            "summary": "Fetch data semua group JM berdasarkan Parent id",
+            "description": "",
+            "operationId": "FetchOrang",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation",
+                "schema": {
+                    "type": "array",
+                    "items": {
+                    "$ref": "#/definitions/Orang"
+                    }
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:group",
+                    "read:group"
+                ]
+                }
+            ]
+            }
+        },
+        "/group/create": {
+            "post": {
+            "tags": [
+                "group"
+            ],
+            "summary": "Add data group JM",
+            "description": "",
+            "operationId": "AddOrang",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                {
+                "in": "body",
+                "name": "body",
+                "description": "Orang object that needs to be added to db",
+                "required": true,
+                "schema": {
+                    "$ref": "#/definitions/Orang"
+                }
+                }
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation"
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:group",
+                    "read:group"
+                ]
+                }
+            ]
+        },
+        "/group/update/{id}": {
+            "put": {
+            "tags": [
+                "group"
+            ],
+            "summary": "Update data group JM",
+            "description": "",
+            "operationId": "UpdateOrang",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                {
+                "in": "body",
+                "name": "body",
+                "description": "Orang object that needs to be added to db",
+                "required": true,
+                "schema": {
+                    "$ref": "#/definitions/Orang"
+                }
+                }
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation"
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:group",
+                    "read:group"
+                ]
+                }
+            ]
+        },
+        "/group/{id}": {
+            "delete": {
+            "tags": [
+                "group"
+            ],
+            "summary": "delete data semua group JM",
+            "description": "",
+            "operationId": "DeleteOrang",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation",
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:group",
+                    "read:group"
+                ]
+                }
+            ]
+            }
+        },
+        "/instansi/all": {
+            "get": {
+            "tags": [
+                "instansi"
+            ],
+            "summary": "Fetch data semua instansi JM",
+            "description": "",
+            "operationId": "FetchInstansi",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+            
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation",
+                "schema": {
+                    "type": "array",
+                    "items": {
+                    "$ref": "#/definitions/Instansi"
+                    }
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:instansi",
+                    "read:instansi"
+                ]
+                }
+            ]
+            }
+        },
+        "/instansi/byId/{id}": {
+            "get": {
+            "tags": [
+                "instansi"
+            ],
+            "summary": "Fetch data semua instansi JM berdasarkan id",
+            "description": "",
+            "operationId": "FetchInstansi",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation",
+                "schema": {
+                    "type": "object",
+                    "items": {
+                    "$ref": "#/definitions/Instansi"
+                    }
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:instansi",
+                    "read:instansi"
+                ]
+                }
+            ]
+            }   
+        },
+        "/instansi/create": {
+            "post": {
+            "tags": [
+                "instansi"
+            ],
+            "summary": "Add data instansi JM",
+            "description": "",
+            "operationId": "AddInstansi",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                {
+                "in": "body",
+                "name": "body",
+                "description": "Instansi object that needs to be added to db",
+                "required": true,
+                "schema": {
+                    "$ref": "#/definitions/Instansi"
+                }
+                }
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation"
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:instansi",
+                    "read:instansi"
+                ]
+                }
+            ]
+        },
+        "/instansi/update/{id}": {
+            "put": {
+            "tags": [
+                "instansi"
+            ],
+            "summary": "Update data instansi JM",
+            "description": "",
+            "operationId": "UpdateInstansi",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                {
+                "in": "body",
+                "name": "body",
+                "description": "Instansi object that needs to be added to db",
+                "required": true,
+                "schema": {
+                    "$ref": "#/definitions/Instansi"
+                }
+                }
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation"
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:instansi",
+                    "read:instansi"
+                ]
+                }
+            ]
+        },
+        "/instansi/{id}": {
+            "delete": {
+            "tags": [
+                "instansi"
+            ],
+            "summary": "delete data semua instansi JM",
+            "description": "",
+            "operationId": "DeleteInstansi",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation",
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:instansi",
+                    "read:instansi"
+                ]
+                }
+            ]
+            }
+        },
+        "/user/all": {
+            "get": {
+            "tags": [
+                "user"
+            ],
+            "summary": "Fetch data semua user JM",
+            "description": "",
+            "operationId": "FetchUser",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+            
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation",
+                "schema": {
+                    "type": "array",
+                    "items": {
+                    "$ref": "#/definitions/User"
+                    }
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:user",
+                    "read:user"
+                ]
+                }
+            ]
+            }
+        },
+        "/user/byId/{id}": {
+            "get": {
+            "tags": [
+                "user"
+            ],
+            "summary": "Fetch data semua user JM berdasarkan id",
+            "description": "",
+            "operationId": "FetchUser",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation",
+                "schema": {
+                    "type": "object",
+                    "items": {
+                    "$ref": "#/definitions/User"
+                    }
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:user",
+                    "read:user"
+                ]
+                }
+            ]
+            }
+        },
+        "/user/create": {
+            "post": {
+            "tags": [
+                "user"
+            ],
+            "summary": "Add data user JM",
+            "description": "",
+            "operationId": "AddUser",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                {
+                "in": "body",
+                "name": "body",
+                "description": "User object that needs to be added to db",
+                "required": true,
+                "schema": {
+                    "$ref": "#/definitions/User"
+                }
+                }
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation"
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:user",
+                    "read:user"
+                ]
+                }
+            ]
+        },
+        "/user/update/{id}": {
+            "put": {
+            "tags": [
+                "user"
+            ],
+            "summary": "Update data user JM",
+            "description": "",
+            "operationId": "UpdateUser",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                {
+                "in": "body",
+                "name": "body",
+                "description": "User object that needs to be added to db",
+                "required": true,
+                "schema": {
+                    "$ref": "#/definitions/User"
+                }
+                }
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation"
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:user",
+                    "read:user"
+                ]
+                }
+            ]
+        },
+        "/user/{id}": {
+            "delete": {
+            "tags": [
+                "user"
+            ],
+            "summary": "delete data semua user JM",
+            "description": "",
+            "operationId": "DeleteUser",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation",
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:user",
+                    "read:user"
+                ]
+                }
+            ]
+            }
+        },
+        "/kesibukan/all": {
+            "get": {
+            "tags": [
+                "kesibukan"
+            ],
+            "summary": "Fetch data semua kesibukan JM",
+            "description": "",
+            "operationId": "FetchKesibukan",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+            
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation",
+                "schema": {
+                    "type": "array",
+                    "items": {
+                    "$ref": "#/definitions/Kesibukan"
+                    }
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:kesibukan",
+                    "read:kesibukan"
+                ]
+                }
+            ]
+            }
+        },
+        "/kesibukan/byId/{id}": {
+            "get": {
+            "tags": [
+                "kesibukan"
+            ],
+            "summary": "Fetch data semua kesibukan JM berdasarkan id",
+            "description": "",
+            "operationId": "FetchKesibukan",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation",
+                "schema": {
+                    "type": "object",
+                    "items": {
+                    "$ref": "#/definitions/Kesibukan"
+                    }
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:kesibukan",
+                    "read:kesibukan"
+                ]
+                }
+            ]
+            }
+        },
+        "/kesibukan/create": {
+            "post": {
+            "tags": [
+                "kesibukan"
+            ],
+            "summary": "Add data kesibukan JM",
+            "description": "",
+            "operationId": "AddKesibukan",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                {
+                "in": "body",
+                "name": "body",
+                "description": "Kesibukan object that needs to be added to db",
+                "required": true,
+                "schema": {
+                    "$ref": "#/definitions/Kesibukan"
+                }
+                }
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation"
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:kesibukan",
+                    "read:kesibukan"
+                ]
+                }
+            ]
+        },
+        "/kesibukan/update/{id}": {
+            "put": {
+            "tags": [
+                "kesibukan"
+            ],
+            "summary": "Update data kesibukan JM",
+            "description": "",
+            "operationId": "UpdateKesibukan",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                {
+                "in": "body",
+                "name": "body",
+                "description": "Kesibukan object that needs to be added to db",
+                "required": true,
+                "schema": {
+                    "$ref": "#/definitions/Kesibukan"
+                }
+                }
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation"
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:kesibukan",
+                    "read:kesibukan"
+                ]
+                }
+            ]
+        },
+        "/kesibukan/{id}": {
+            "delete": {
+            "tags": [
+                "kesibukan"
+            ],
+            "summary": "delete data semua kesibukan JM",
+            "description": "",
+            "operationId": "DeleteKesibukan",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation",
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:kesibukan",
+                    "read:kesibukan"
+                ]
+                }
+            ]
+            }
+        },
+        "/relationship/all": {
+            "get": {
+            "tags": [
+                "relationship"
+            ],
+            "summary": "Fetch data semua relationship JM",
+            "description": "",
+            "operationId": "FetchRelationship",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+            
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation",
+                "schema": {
+                    "type": "array",
+                    "items": {
+                    "$ref": "#/definitions/Relationship"
+                    }
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:relationship",
+                    "read:relationship"
+                ]
+                }
+            ]
+            }
+        },
+        "/relationship/byId/{id}": {
+            "get": {
+            "tags": [
+                "relationship"
+            ],
+            "summary": "Fetch data semua relationship JM berdasarkan id",
+            "description": "",
+            "operationId": "FetchRelationship",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation",
+                "schema": {
+                    "type": "object",
+                    "items": {
+                    "$ref": "#/definitions/Relationship"
+                    }
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:relationship",
+                    "read:relationship"
+                ]
+                }
+            ]
+            }
+        },
+        "/relationship/create": {
+            "post": {
+            "tags": [
+                "relationship"
+            ],
+            "summary": "Add data relationship JM",
+            "description": "",
+            "operationId": "AddRelationship",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                {
+                "in": "body",
+                "name": "body",
+                "description": "Relationship object that needs to be added to db",
+                "required": true,
+                "schema": {
+                    "$ref": "#/definitions/Relationship"
+                }
+                }
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation"
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:relationship",
+                    "read:relationship"
+                ]
+                }
+            ]
+        },
+        "/relationship/update/{id}": {
+            "put": {
+            "tags": [
+                "relationship"
+            ],
+            "summary": "Update data relationship JM",
+            "description": "",
+            "operationId": "UpdateRelationship",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                {
+                "in": "body",
+                "name": "body",
+                "description": "Relationship object that needs to be added to db",
+                "required": true,
+                "schema": {
+                    "$ref": "#/definitions/Relationship"
+                }
+                }
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation"
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:relationship",
+                    "read:relationship"
+                ]
+                }
+            ]
+        },
+        "/relationship/{id}": {
+            "delete": {
+            "tags": [
+                "relationship"
+            ],
+            "summary": "delete data semua relationship JM",
+            "description": "",
+            "operationId": "DeleteRelationship",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation",
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:relationship",
+                    "read:relationship"
+                ]
+                }
+            ]
+            }
+        },
+        "/event/all": {
+            "get": {
+            "tags": [
+                "event"
+            ],
+            "summary": "Fetch data semua event JM",
+            "description": "",
+            "operationId": "FetchEvent",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+            
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation",
+                "schema": {
+                    "type": "array",
+                    "items": {
+                    "$ref": "#/definitions/Event"
+                    }
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:event",
+                    "read:event"
+                ]
+                }
+            ]
+            }
+        },
+        "/event/byId/{id}": {
+            "get": {
+            "tags": [
+                "event"
+            ],
+            "summary": "Fetch data semua event JM berdasarkan id",
+            "description": "",
+            "operationId": "FetchEvent",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation",
+                "schema": {
+                    "type": "object",
+                    "items": {
+                    "$ref": "#/definitions/Event"
+                    }
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:event",
+                    "read:event"
+                ]
+                }
+            ]
+            }
+        },
+        "/event/create": {
+            "post": {
+            "tags": [
+                "event"
+            ],
+            "summary": "Add data event JM",
+            "description": "",
+            "operationId": "AddEvent",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                {
+                "in": "body",
+                "name": "body",
+                "description": "Event object that needs to be added to db",
+                "required": true,
+                "schema": {
+                    "$ref": "#/definitions/Event"
+                }
+                }
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation"
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:event",
+                    "read:event"
+                ]
+                }
+            ]
+        },
+        "/event/update/{id}": {
+            "put": {
+            "tags": [
+                "event"
+            ],
+            "summary": "Update data event JM",
+            "description": "",
+            "operationId": "UpdateEvent",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                {
+                "in": "body",
+                "name": "body",
+                "description": "Event object that needs to be added to db",
+                "required": true,
+                "schema": {
+                    "$ref": "#/definitions/Event"
+                }
+                }
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation"
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:event",
+                    "read:event"
+                ]
+                }
+            ]
+        },
+        "/event/{id}": {
+            "delete": {
+            "tags": [
+                "event"
+            ],
+            "summary": "delete data semua event JM",
+            "description": "",
+            "operationId": "DeleteEvent",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation",
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:event",
+                    "read:event"
+                ]
+                }
+            ]
+            }
+        },
+        "/kehadiran/all": {
+            "get": {
+            "tags": [
+                "kehadiran"
+            ],
+            "summary": "Fetch data semua kehadiran JM",
+            "description": "",
+            "operationId": "FetchKehadiran",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+            
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation",
+                "schema": {
+                    "type": "array",
+                    "items": {
+                    "$ref": "#/definitions/Kehadiran"
+                    }
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:kehadiran",
+                    "read:kehadiran"
+                ]
+                }
+            ]
+            }
+        },
+        "/kehadiran/byId/{id}": {
+            "get": {
+            "tags": [
+                "kehadiran"
+            ],
+            "summary": "Fetch data semua kehadiran JM berdasarkan id",
+            "description": "",
+            "operationId": "FetchKehadiran",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation",
+                "schema": {
+                    "type": "object",
+                    "items": {
+                    "$ref": "#/definitions/Kehadiran"
+                    }
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:kehadiran",
+                    "read:kehadiran"
+                ]
+                }
+            ]
+            }
+        },
+        "/kehadiran/create": {
+            "post": {
+            "tags": [
+                "kehadiran"
+            ],
+            "summary": "Add data kehadiran JM",
+            "description": "",
+            "operationId": "AddKehadiran",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                {
+                "in": "body",
+                "name": "body",
+                "description": "Kehadiran object that needs to be added to db",
+                "required": true,
+                "schema": {
+                    "$ref": "#/definitions/Kehadiran"
+                }
+                }
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation"
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:kehadiran",
+                    "read:kehadiran"
+                ]
+                }
+            ]
+        },
+        "/kehadiran/update/{id}": {
+            "put": {
+            "tags": [
+                "kehadiran"
+            ],
+            "summary": "Update data kehadiran JM",
+            "description": "",
+            "operationId": "UpdateKehadiran",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                {
+                "in": "body",
+                "name": "body",
+                "description": "Kehadiran object that needs to be added to db",
+                "required": true,
+                "schema": {
+                    "$ref": "#/definitions/Kehadiran"
+                }
+                }
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation"
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:kehadiran",
+                    "read:kehadiran"
+                ]
+                }
+            ]
+        },
+        "/kehadiran/{id}": {
+            "delete": {
+            "tags": [
+                "kehadiran"
+            ],
+            "summary": "delete data semua kehadiran JM",
+            "description": "",
+            "operationId": "DeleteKehadiran",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation",
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:kehadiran",
+                    "read:kehadiran"
+                ]
+                }
+            ]
+            }
+        },
+        "/dapuan/all": {
+            "get": {
+            "tags": [
+                "dapuan"
+            ],
+            "summary": "Fetch data semua dapuan JM",
+            "description": "",
+            "operationId": "FetchDapuan",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+            
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation",
+                "schema": {
+                    "type": "array",
+                    "items": {
+                    "$ref": "#/definitions/Dapuan"
+                    }
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:dapuan",
+                    "read:dapuan"
+                ]
+                }
+            ]
+            }
+        },
+        "/dapuan/byId/{id}": {
+            "get": {
+            "tags": [
+                "dapuan"
+            ],
+            "summary": "Fetch data semua dapuan JM berdasarkan id",
+            "description": "",
+            "operationId": "FetchDapuan",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation",
+                "schema": {
+                    "type": "object",
+                    "items": {
+                    "$ref": "#/definitions/Dapuan"
+                    }
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:dapuan",
+                    "read:dapuan"
+                ]
+                }
+            ]
+            }
+        },
+        "/dapuan/create": {
+            "post": {
+            "tags": [
+                "dapuan"
+            ],
+            "summary": "Add data dapuan JM",
+            "description": "",
+            "operationId": "AddDapuan",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                {
+                "in": "body",
+                "name": "body",
+                "description": "Dapuan object that needs to be added to db",
+                "required": true,
+                "schema": {
+                    "$ref": "#/definitions/Dapuan"
+                }
+                }
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation"
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:dapuan",
+                    "read:dapuan"
+                ]
+                }
+            ]
+        },
+        "/dapuan/update/{id}": {
+            "put": {
+            "tags": [
+                "dapuan"
+            ],
+            "summary": "Update data dapuan JM",
+            "description": "",
+            "operationId": "UpdateDapuan",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                {
+                "in": "body",
+                "name": "body",
+                "description": "Dapuan object that needs to be added to db",
+                "required": true,
+                "schema": {
+                    "$ref": "#/definitions/Dapuan"
+                }
+                }
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation"
+                }
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:dapuan",
+                    "read:dapuan"
+                ]
+                }
+            ]
+        },
+        "/dapuan/{id}": {
+            "delete": {
+            "tags": [
+                "dapuan"
+            ],
+            "summary": "delete data semua dapuan JM",
+            "description": "",
+            "operationId": "DeleteDapuan",
+            "consumes": [
+                "application/json",
+                "application/xml"
+            ],
+            "produces": [
+                "application/xml",
+                "application/json"
+            ],
+            "parameters": [
+                
+            ],
+            "responses": {
+                "200": {
+                "description": "successful operation",
+                },
+                "400": {
+                "description": "Invalid status value"
+                }
+            },
+            "security": [
+                {
+                "banbar_auth": [
+                    "write:dapuan",
+                    "read:dapuan"
+                ]
+                }
+            ]
+            }
+        }
+    },    
+    "securityDefinitions": {
+        "banbar_auth": {
+        "type": "oauth2",
+        "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
+        "flow": "implicit",
+        "scopes": {
+            "write:pets": "modify orang in your account",
+            "read:pets": "read your orang"
+        }
+        },
+        "api_key": {
+        "type": "apiKey",
+        "name": "api_key",
+        "in": "header"
+        }
+    },
+    "definitions": {
+        "User": {
+        "type": "object",
+        "properties": {
+            "id": {
+            "type": "integer",
+            "format": "int64"
+            },
+            "username": {
+            "type": "integer",
+            "format": "int64"
+            },
+            "password": {
+            "type": "string"
+            },
+            "orang": {
+            "$ref":"#/definitions/Orang"
+            }
+        },
+        "xml": {
+            "name": "Orang"
+        }
+        },
+        "Group": {
+        "type": "object",
+        "properties": {
+            "id": {
+            "type": "integer",
+            "format": "int64"
+            },
+            "name": {
+            "type": "string"
+            },
+            "masjid":{
+            "type": "string"
+            },
+            "masjid_lang":{
+            "type" : "float",
+            "format" : "float64"
+            },
+            "masjid_lat":{
+            "type" : "float",
+            "format" : "float64"
+            },
+            "alamat":{
+            "type" : "string"
+            },
+            "group_type":{
+            "type" : "string",
+            "format" : "int64",
+            "enum":[
+                "kelompok", 
+                "desa",
+                "daerah"
+            ]
+            },
+            "parent":{
+            "$ref":"#/definitions/Group"
+            }
+        },
+        "xml": {
+            "name": "Group"
+        }
+        },
+        "Orang": {
+        "type": "object",
+        "properties": {
+            "id": {
+            "type": "integer",
+            "format": "int64"
+            },
+            "nama": {
+            "type": "string"
+            },
+            "alamat": {
+            "type": "string"
+            },
+            "tempat_lahir": {
+            "type": "string"
+            },
+            "tanggal_lahir": {
+            "type": "string",
+            "format" : "date-time"
+            },
+            "status": {
+            "type": "string",
+            "enum":[
+                "bekerja",
+                "sekolah",
+                "kuliah",
+                "lain-lain"
+            ]
+            },
+            "photo": {
+            "type": "string",
+            "description": "Photo Url"
+            },
+            "kelompokId": {
+            "$ref":"#/definitions/Group"
+            }
+        },
+        "xml": {
+            "name": "Orang"
+        }
+        },
+        "Event": {
+        "type": "object",
+        "properties": {
+            "id": {
+            "type": "integer",
+            "format": "int64"
+            },
+            "nama": {
+            "type": "string"
+            },
+            "tanggal":{
+            "type":"string",
+            "format":"date-time"
+            },
+            "tempat_lang":{
+            "type":"float",
+            "format":"float64"
+            },
+            "tempat_lat":{
+            "type":"float",
+            "format":"float64"
+            },
+            "poster":{
+            "type":"string",
+            "description":"poster picture url"
+            }
+        },
+        "xml": {
+            "name": "Tag"
+        }
+        },
+        "Kehadiran":{
+        "type": "object",
+        "properties" :{
+            "id": {
+            "type": "integer",
+            "format": "int64"
+            },
+            "jam_hadir":{
+            "type":"string",
+            "format":"date-time"
+            },
+            "keterangan":{
+            "type": "string",
+            "enum":[
+                "tepat",
+                "terlambat",
+                "izin",
+                "absen"
+            ]
+            },
+            "event":{
+            "$ref":"#/definitions/Event"
+            },
+            "orang":{
+            "$ref":"#/definitions/Orang"
+            }
+        }
+        },
+        "Relationship":{
+        "type":"object",
+        "properties":{
+            "id":{
+            "type":"integer",
+            "format":"int64"
+            },
+            "from":{
+            "$ref":"#/definitions/Orang"
+            },
+            "to":{
+            "$ref":"#/definitions/Orang"
+            },
+            "relation_type":{
+            "type":"string",
+            "enum":[
+                "wali/orangtua",
+                "suami/istri"
+            ]
+            }
+        }
+        },
+        "Kesibukan":{
+        "type":"object",
+        "properties":{
+            "id":{
+            "type":"integer",
+            "format":"int64"
+            },
+            "orang":{
+            "$ref":"#/definitions/Orang"
+            },
+            "instansi":{
+            "$ref":"#/definitions/Instansi"
+            },
+            "status":{
+            "type":"string",
+            "enum":[
+                "bekerja",
+                "sekolah",
+                "kuliah",
+                "lain2"
+            ]
+            },
+            "kedudukan":{
+            "type":"string",
+            "description":" jabatan(pekerjaan), kelas (sekolah), tingkat(kuliah), kegiatan(lain2) "
+            },
+            "active":{
+            "type" : "string",
+            "enum": [
+                "active",
+                "inactive"
+            ]
+            }
+        }
+        },
+        "dapuan":{
+        "type":"object",
+        "properties":{
+            "id":{
+            "type":"integer",
+            "format":"int64"
+            },
+            "dapuan":{
+            "type":"string"
+            },
+            "orang":{
+            "$ref":"#/definitions/Orang"
+            },
+            "grup":{
+            "$ref":"#/definitions/Group"
+            }
+        }
+        }
+        ,
+        "instansi":{
+        "type":"object",
+        "properties":{
+            "id":{
+            "type":"integer",
+            "format":"int64"
+            },
+            "nama_instansi":{
+            "type":"string"
+            },
+            "alamat_instansi":{
+            "type":"string"
+            }
+        }
+        }    ,
+        "ApiResponse": {
+        "type": "object",
+        "properties": {
+            "code": {
+            "type": "integer",
+            "format": "int32"
+            },
+            "type": {
+            "type": "string"
+            },
+            "message": {
+            "type": "string"
+            }
+        }
+        }
+    },
+    "externalDocs": {
+        "description": "Find out more about Swagger",
+        "url": "http://swagger.io"
+    }
+    }

@@ -1,0 +1,448 @@
+{
+    "/group/all": {
+      "get": {
+        "tags": [
+          "group"
+        ],
+        "summary": "Fetch data semua group JM",
+        "description": "",
+        "operationId": "FetchOrang",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+         
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Orang"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:group",
+              "read:group"
+            ]
+          }
+        ]
+      }
+    },
+    "/group/byId/{id}": {
+      "get": {
+        "tags": [
+          "group"
+        ],
+        "summary": "Fetch data semua group JM berdasarkan id",
+        "description": "",
+        "operationId": "FetchOrang",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Orang"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:group",
+              "read:group"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "group"
+        ],
+        "summary": "Delete data semua group JM berdasarkan id",
+        "description": "",
+        "operationId": "DeleteOrang",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Pet object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Orang"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Orang"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:group",
+              "read:group"
+            ]
+          }
+        ]
+      }
+    },
+    "/group/byType/{id}": {
+      "get": {
+        "tags": [
+          "group"
+        ],
+        "summary": "Fetch data semua group JM berdasarkan tipe",
+        "description": "",
+        "operationId": "FetchOrangType",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Orang"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:group",
+              "read:group"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "group"
+        ],
+        "summary": "Delete data semua group JM berdasarkan id",
+        "description": "",
+        "operationId": "DeleteOrang",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Pet object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Orang"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Orang"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:group",
+              "read:group"
+            ]
+          }
+        ]
+      }
+    },
+    "/group/byParentId/{id}": {
+      "get": {
+        "tags": [
+          "group"
+        ],
+        "summary": "Fetch data semua group JM berdasarkan Parent id",
+        "description": "",
+        "operationId": "FetchOrang",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Orang"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:group",
+              "read:group"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "group"
+        ],
+        "summary": "Delete data semua group JM berdasarkan id",
+        "description": "",
+        "operationId": "DeleteOrang",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Pet object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Orang"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Orang"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:group",
+              "read:group"
+            ]
+          }
+        ]
+      }
+    },
+    "/group/create": {
+      "post": {
+        "tags": [
+          "group"
+        ],
+        "summary": "Add data group JM",
+        "description": "",
+        "operationId": "AddOrang",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Orang object that needs to be added to db",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Orang"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:group",
+              "read:group"
+            ]
+          }
+        ]
+    },
+    "/group/update/{id}": {
+      "put": {
+        "tags": [
+          "group"
+        ],
+        "summary": "Update data group JM",
+        "description": "",
+        "operationId": "UpdateOrang",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Orang object that needs to be added to db",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Orang"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:group",
+              "read:group"
+            ]
+          }
+        ]
+    },
+    "/group/{id}": {
+      "delete": {
+        "tags": [
+          "group"
+        ],
+        "summary": "delete data semua group JM",
+        "description": "",
+        "operationId": "DeleteOrang",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:group",
+              "read:group"
+            ]
+          }
+        ]
+      }
+    }
+}  

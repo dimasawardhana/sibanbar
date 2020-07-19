@@ -2,11 +2,11 @@ package structs
 
 import "github.com/jinzhu/gorm"
 
-type relationship struct {
+type Relationship struct {
 	gorm.Model
 	From          Orang
-	idFrom        uint
+	IdFrom        uint
 	To            Orang
-	idTo          uint
+	IdTo          uint
 	Relation_type string
 }

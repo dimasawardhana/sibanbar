@@ -1,0 +1,264 @@
+{
+    "/kehadiran/all": {
+      "get": {
+        "tags": [
+          "kehadiran"
+        ],
+        "summary": "Fetch data semua kehadiran JM",
+        "description": "",
+        "operationId": "FetchKehadiran",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+         
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Kehadiran"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:kehadiran",
+              "read:kehadiran"
+            ]
+          }
+        ]
+      }
+    },
+    "/kehadiran/byId/{id}": {
+      "get": {
+        "tags": [
+          "kehadiran"
+        ],
+        "summary": "Fetch data semua kehadiran JM berdasarkan id",
+        "description": "",
+        "operationId": "FetchKehadiran",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Kehadiran"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:kehadiran",
+              "read:kehadiran"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "kehadiran"
+        ],
+        "summary": "Delete data semua kehadiran JM berdasarkan id",
+        "description": "",
+        "operationId": "DeleteKehadiran",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Pet object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Kehadiran"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Kehadiran"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:kehadiran",
+              "read:kehadiran"
+            ]
+          }
+        ]
+      }
+    },
+    "/kehadiran/create": {
+      "post": {
+        "tags": [
+          "kehadiran"
+        ],
+        "summary": "Add data kehadiran JM",
+        "description": "",
+        "operationId": "AddKehadiran",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Kehadiran object that needs to be added to db",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Kehadiran"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:kehadiran",
+              "read:kehadiran"
+            ]
+          }
+        ]
+    },
+    "/kehadiran/update/{id}": {
+      "put": {
+        "tags": [
+          "kehadiran"
+        ],
+        "summary": "Update data kehadiran JM",
+        "description": "",
+        "operationId": "UpdateKehadiran",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Kehadiran object that needs to be added to db",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Kehadiran"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:kehadiran",
+              "read:kehadiran"
+            ]
+          }
+        ]
+    },
+    "/kehadiran/{id}": {
+      "delete": {
+        "tags": [
+          "kehadiran"
+        ],
+        "summary": "delete data semua kehadiran JM",
+        "description": "",
+        "operationId": "DeleteKehadiran",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:kehadiran",
+              "read:kehadiran"
+            ]
+          }
+        ]
+      }
+    }
+}  

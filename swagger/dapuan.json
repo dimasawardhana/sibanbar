@@ -1,0 +1,264 @@
+{
+    "/dapuan/all": {
+      "get": {
+        "tags": [
+          "dapuan"
+        ],
+        "summary": "Fetch data semua dapuan JM",
+        "description": "",
+        "operationId": "FetchDapuan",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+         
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Dapuan"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:dapuan",
+              "read:dapuan"
+            ]
+          }
+        ]
+      }
+    },
+    "/dapuan/byId/{id}": {
+      "get": {
+        "tags": [
+          "dapuan"
+        ],
+        "summary": "Fetch data semua dapuan JM berdasarkan id",
+        "description": "",
+        "operationId": "FetchDapuan",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Dapuan"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:dapuan",
+              "read:dapuan"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "dapuan"
+        ],
+        "summary": "Delete data semua dapuan JM berdasarkan id",
+        "description": "",
+        "operationId": "DeleteDapuan",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Pet object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Dapuan"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Dapuan"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:dapuan",
+              "read:dapuan"
+            ]
+          }
+        ]
+      }
+    },
+    "/dapuan/create": {
+      "post": {
+        "tags": [
+          "dapuan"
+        ],
+        "summary": "Add data dapuan JM",
+        "description": "",
+        "operationId": "AddDapuan",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Dapuan object that needs to be added to db",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Dapuan"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:dapuan",
+              "read:dapuan"
+            ]
+          }
+        ]
+    },
+    "/dapuan/update/{id}": {
+      "put": {
+        "tags": [
+          "dapuan"
+        ],
+        "summary": "Update data dapuan JM",
+        "description": "",
+        "operationId": "UpdateDapuan",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Dapuan object that needs to be added to db",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Dapuan"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:dapuan",
+              "read:dapuan"
+            ]
+          }
+        ]
+    },
+    "/dapuan/{id}": {
+      "delete": {
+        "tags": [
+          "dapuan"
+        ],
+        "summary": "delete data semua dapuan JM",
+        "description": "",
+        "operationId": "DeleteDapuan",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:dapuan",
+              "read:dapuan"
+            ]
+          }
+        ]
+      }
+    }
+}  

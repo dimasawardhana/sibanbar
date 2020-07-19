@@ -7,7 +7,7 @@ import (
 )
 
 func DBInit() *gorm.DB {
-	db, err := gorm.Open(DBmysql.client, DBmysql.user+":"+DBmysql.password+"@tcp("+DBmysql.hostname+":"+DBmysql.port+")/"+DBmysql.db+DBmysql.additionalSettings)
+	db, err := gorm.Open("mysql", "eizrael"+":"+"mysqlPengalaman354"+"@tcp("+"localhost"+":"+"3306"+")/"+"siibanbar"+"?charset=utf8&parseTime=True&loc=Local")
 	if err != nil {
 		// panic("failed to connect to database")
 		panic(err)

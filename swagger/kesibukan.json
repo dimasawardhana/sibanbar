@@ -1,0 +1,264 @@
+{
+    "/kesibukan/all": {
+      "get": {
+        "tags": [
+          "kesibukan"
+        ],
+        "summary": "Fetch data semua kesibukan JM",
+        "description": "",
+        "operationId": "FetchKesibukan",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+         
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Kesibukan"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:kesibukan",
+              "read:kesibukan"
+            ]
+          }
+        ]
+      }
+    },
+    "/kesibukan/byId/{id}": {
+      "get": {
+        "tags": [
+          "kesibukan"
+        ],
+        "summary": "Fetch data semua kesibukan JM berdasarkan id",
+        "description": "",
+        "operationId": "FetchKesibukan",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Kesibukan"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:kesibukan",
+              "read:kesibukan"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "kesibukan"
+        ],
+        "summary": "Delete data semua kesibukan JM berdasarkan id",
+        "description": "",
+        "operationId": "DeleteKesibukan",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Pet object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Kesibukan"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Kesibukan"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:kesibukan",
+              "read:kesibukan"
+            ]
+          }
+        ]
+      }
+    },
+    "/kesibukan/create": {
+      "post": {
+        "tags": [
+          "kesibukan"
+        ],
+        "summary": "Add data kesibukan JM",
+        "description": "",
+        "operationId": "AddKesibukan",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Kesibukan object that needs to be added to db",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Kesibukan"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:kesibukan",
+              "read:kesibukan"
+            ]
+          }
+        ]
+    },
+    "/kesibukan/update/{id}": {
+      "put": {
+        "tags": [
+          "kesibukan"
+        ],
+        "summary": "Update data kesibukan JM",
+        "description": "",
+        "operationId": "UpdateKesibukan",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Kesibukan object that needs to be added to db",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Kesibukan"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:kesibukan",
+              "read:kesibukan"
+            ]
+          }
+        ]
+    },
+    "/kesibukan/{id}": {
+      "delete": {
+        "tags": [
+          "kesibukan"
+        ],
+        "summary": "delete data semua kesibukan JM",
+        "description": "",
+        "operationId": "DeleteKesibukan",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:kesibukan",
+              "read:kesibukan"
+            ]
+          }
+        ]
+      }
+    }
+}  

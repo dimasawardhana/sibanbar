@@ -1,0 +1,264 @@
+{
+    "/event/all": {
+      "get": {
+        "tags": [
+          "event"
+        ],
+        "summary": "Fetch data semua event JM",
+        "description": "",
+        "operationId": "FetchEvent",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+         
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Event"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:event",
+              "read:event"
+            ]
+          }
+        ]
+      }
+    },
+    "/event/byId/{id}": {
+      "get": {
+        "tags": [
+          "event"
+        ],
+        "summary": "Fetch data semua event JM berdasarkan id",
+        "description": "",
+        "operationId": "FetchEvent",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Event"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:event",
+              "read:event"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "event"
+        ],
+        "summary": "Delete data semua event JM berdasarkan id",
+        "description": "",
+        "operationId": "DeleteEvent",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Pet object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Event"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Event"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:event",
+              "read:event"
+            ]
+          }
+        ]
+      }
+    },
+    "/event/create": {
+      "post": {
+        "tags": [
+          "event"
+        ],
+        "summary": "Add data event JM",
+        "description": "",
+        "operationId": "AddEvent",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Event object that needs to be added to db",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Event"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:event",
+              "read:event"
+            ]
+          }
+        ]
+    },
+    "/event/update/{id}": {
+      "put": {
+        "tags": [
+          "event"
+        ],
+        "summary": "Update data event JM",
+        "description": "",
+        "operationId": "UpdateEvent",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Event object that needs to be added to db",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Event"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:event",
+              "read:event"
+            ]
+          }
+        ]
+    },
+    "/event/{id}": {
+      "delete": {
+        "tags": [
+          "event"
+        ],
+        "summary": "delete data semua event JM",
+        "description": "",
+        "operationId": "DeleteEvent",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:event",
+              "read:event"
+            ]
+          }
+        ]
+      }
+    }
+}  

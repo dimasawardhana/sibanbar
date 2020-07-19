@@ -1,0 +1,264 @@
+{
+    "/relationship/all": {
+      "get": {
+        "tags": [
+          "relationship"
+        ],
+        "summary": "Fetch data semua relationship JM",
+        "description": "",
+        "operationId": "FetchRelationship",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+         
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Relationship"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:relationship",
+              "read:relationship"
+            ]
+          }
+        ]
+      }
+    },
+    "/relationship/byId/{id}": {
+      "get": {
+        "tags": [
+          "relationship"
+        ],
+        "summary": "Fetch data semua relationship JM berdasarkan id",
+        "description": "",
+        "operationId": "FetchRelationship",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Relationship"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:relationship",
+              "read:relationship"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "relationship"
+        ],
+        "summary": "Delete data semua relationship JM berdasarkan id",
+        "description": "",
+        "operationId": "DeleteRelationship",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Pet object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Relationship"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Relationship"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:relationship",
+              "read:relationship"
+            ]
+          }
+        ]
+      }
+    },
+    "/relationship/create": {
+      "post": {
+        "tags": [
+          "relationship"
+        ],
+        "summary": "Add data relationship JM",
+        "description": "",
+        "operationId": "AddRelationship",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Relationship object that needs to be added to db",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Relationship"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:relationship",
+              "read:relationship"
+            ]
+          }
+        ]
+    },
+    "/relationship/update/{id}": {
+      "put": {
+        "tags": [
+          "relationship"
+        ],
+        "summary": "Update data relationship JM",
+        "description": "",
+        "operationId": "UpdateRelationship",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Relationship object that needs to be added to db",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Relationship"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:relationship",
+              "read:relationship"
+            ]
+          }
+        ]
+    },
+    "/relationship/{id}": {
+      "delete": {
+        "tags": [
+          "relationship"
+        ],
+        "summary": "delete data semua relationship JM",
+        "description": "",
+        "operationId": "DeleteRelationship",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        },
+        "security": [
+          {
+            "banbar_auth": [
+              "write:relationship",
+              "read:relationship"
+            ]
+          }
+        ]
+      }
+    }
+}  

@@ -3,183 +3,189 @@ package controllers
 import (
 	"net/http"
 	"time"
+
 	"../structs"
 	"github.com/gin-gonic/gin"
 )
-type kehadiranJSON struct{
-	jam_hadir string `json:"jam_hadir"`
-	keterangan int `json:"keterangan"`
-	eventId uint `json:"eventId"`
-	orangId uint `json:"orangId"`
+
+type kehadiranJSON struct {
+	// Jam_hadir  string `json:"jam_hadir"`
+	Keterangan string `json:"keterangan" form:"keterangan"`
+	EventId    uint   `json:"eventId" form:"eventId"`
+	OrangId    uint   `json:"orangId" form:"orangId"`
 }
 
-func (idb *InDB) GetKehadiran(c *gin.Context){
+func (idb *InDB) GetKehadiran(c *gin.Context) {
 	var (
 		kehadiran []structs.Kehadiran
-		result gin.H
+		result    gin.H
 	)
-	idb.DB.Find(&kehadiran)
+	idb.DB.Preload("Event").Preload("Orang").Preload("Orang.Kelompok").Find(&kehadiran)
 
-	if len(kehadiran)<0{
+	if len(kehadiran) < 0 {
 		result = gin.H{
-			"status" : "Not Found",
-			"count" : 0,
-			"result" : gin.H{
-				"kehadiran" : kehadiran,
+			"status": "Not Found",
+			"count":  0,
+			"result": gin.H{
+				"kehadiran": kehadiran,
 			},
 		}
-	}else{
+	} else {
 		result = gin.H{
-			"status" : "OK",
-			"count" : len(kehadiran),
-			"result" : gin.H{
-				"kehadiran" : kehadiran,
+			"status": "OK",
+			"count":  len(kehadiran),
+			"result": gin.H{
+				"kehadiran": kehadiran,
 			},
 		}
 	}
 	c.JSON(http.StatusOK, result)
 }
 
-func (idb *InDB) GetKehadiranById(c *gin.Context){
+func (idb *InDB) GetKehadiranById(c *gin.Context) {
 	var (
 		kehadiran structs.Kehadiran
-		result gin.H
+		result    gin.H
 	)
 	id := c.Param("id")
 
-	err := idb.DB.Where("id = ?", id).First(&kehadiran).Error
+	err := idb.DB.Where("id = ?", id).Preload("Event").Preload("Orang").Preload("Orang.Kelompok").First(&kehadiran).Error
 
-	if err!= nil{
+	if err != nil {
 		result = gin.H{
-			"status" : "Not Found",
-			"error" : err,
+			"status": "Not Found",
+			"error":  err,
 		}
-	}else{
+	} else {
 		result = gin.H{
-			"status" : "ok",
-			"count" : 1,
-			"result" : kehadiran,
+			"status": "ok",
+			"count":  1,
+			"result": kehadiran,
 		}
 	}
 	c.JSON(http.StatusOK, result)
 }
 
-func (idb * InDB) CreateKehadiran(c *gin.Context){
+func (idb *InDB) CreateKehadiran(c *gin.Context) {
 	var (
-		result gin.H
+		result    gin.H
 		kehadiran structs.Kehadiran
-		data kehadiranJSON
+		data      kehadiranJSON
 	)
-	if err:= c.ShouldBindJSON(&data); err != nil{
+	if err := c.ShouldBind(&data); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"error" : err.Error(),
+			"error": err.Error(),
 		})
-	}else{
-	
-		kehadiran.Keterangan = data.keterangan
-		kehadiran.OrangID = data.orangId
-		t, ers := time.Parse("2006-01-02", data.jam_hadir)
-		kehadiran.Jam_hadir = t
-		kehadiran.EventID = data.eventId
-		
+	} else {
 
-		if ers != nil{
-			result = gin.H{
-				"status" : "failed",
-				"result" : kehadiran,
-				"error" : ers,
-			}
-		}else{
-			idb.DB.Create(&kehadiran)
-			result = gin.H{
-				"status" : "ok",
-				"result" : kehadiran,
-			}
+		kehadiran.Keterangan = data.Keterangan
+		kehadiran.OrangID = data.OrangId
+		idb.DB.First(&kehadiran.Orang, data.OrangId)
+		// t, ers := time.Parse("2006-01-02", data.Jam_hadir)
+		kehadiran.Jam_hadir = time.Now()
+		kehadiran.EventID = data.EventId
+		idb.DB.First(&kehadiran.Event, data.EventId)
+
+		// if ers != nil {
+		// 	result = gin.H{
+		// 		"status": "failed",
+		// 		"result": kehadiran,
+		// 		"error":  ers,
+		// 	}
+		// } else {
+		idb.DB.Create(&kehadiran)
+		result = gin.H{
+			"status": "ok",
+			"result": kehadiran,
 		}
-		
+		// }
+
 		c.JSON(http.StatusOK, result)
 	}
 }
 
-func (idb *InDB) UpdateKehadiran ( c *gin.Context){
+func (idb *InDB) UpdateKehadiran(c *gin.Context) {
 	var (
-		result gin.H
+		result        gin.H
 		kehadiranLama structs.Kehadiran
 		kehadiranBaru structs.Kehadiran
-		data kehadiranJSON
+		data          kehadiranJSON
 	)
-	if err := c.ShouldBindJSON(&data); err != nil{
+	if err := c.ShouldBindJSON(&data); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-	}else{
+	} else {
 		id := c.Param("id")
-		err := idb.DB.First(&kehadiranLama, id).Error
-		if err != nil{
+		err := idb.DB.First(&kehadiranBaru, id).Error
+		if err != nil {
 			result = gin.H{
 				"status": "failed",
-				"result" : "Data Not Found",
-				"errors" : err,
+				"result": "Data Not Found",
+				"errors": err,
 			}
-		}else{
-			kehadiranBaru.Keterangan = data.keterangan
-			kehadiranBaru.OrangID = data.orangId
-			t, ers := time.Parse("2006-01-02", data.jam_hadir)
-			kehadiranBaru.Jam_hadir = t
-			kehadiranBaru.EventID = data.eventId
-
-			errs := idb.DB.Model(&kehadiranLama).Updates(kehadiranBaru).Error
-			if ers != nil{
+		} else {
+			kehadiranLama = kehadiranBaru
+			kehadiranBaru.Keterangan = data.Keterangan
+			kehadiranBaru.OrangID = data.OrangId
+			// t, ers := time.Parse("2006-01-02", data.Jam_hadir)
+			kehadiranBaru.Jam_hadir = time.Now()
+			kehadiranBaru.EventID = data.EventId
+			idb.DB.First(&kehadiranBaru.Orang, data.OrangId)
+			idb.DB.First(&kehadiranBaru.Event, data.EventId)
+			// errs := idb.DB.Model(&kehadiranLama).Updates(kehadiranBaru).Error
+			errs := idb.DB.Save(&kehadiranBaru)
+			// if ers != nil {
+			// 	result = gin.H{
+			// 		"status": "failed",
+			// 		"result": kehadiranBaru,
+			// 		"error":  ers,
+			// 	}
+			// } else {
+			if errs != nil {
 				result = gin.H{
-					"status" : "failed",
-					"result" : kehadiranBaru,
-					"error" : ers,
+					"status": "Failed",
+					"result": "failed update",
+					"error":  errs,
 				}
-			}else{
-				if errs != nil{
-					result = gin.H{
-						"status" : "Failed",
-						"result" : "failed update",
-						"error" : errs,
-					}
-				}else{
-					result  = gin.H{
-						"status": "OK",
-						"result" : kehadiranBaru,
-					}
+			} else {
+				result = gin.H{
+					"status": "OK",
+					"before": kehadiranLama,
+					"result": kehadiranBaru,
 				}
 			}
-			
+			// }
+
 			c.JSON(http.StatusOK, result)
 		}
 
 	}
 }
 
-func (idb *InDB) DeleteKehadiran(c *gin.Context){
+func (idb *InDB) DeleteKehadiran(c *gin.Context) {
 	var (
 		kehadiran structs.Kehadiran
-		result gin.H
+		result    gin.H
 	)
 	id := c.Param("id")
 
 	err := idb.DB.First(&kehadiran, id).Error
 
-	if err != nil{
+	if err != nil {
 		result = gin.H{
-			"status" : "Not Found",
-			"result" : "Data Not Found",
+			"status": "Not Found",
+			"result": "Data Not Found",
 		}
-	}else{
+	} else {
 		errs := idb.DB.Delete(&kehadiran).Error
-		if errs != nil{
+		if errs != nil {
 			result = gin.H{
 				"status": "Failed",
-				"result" : "Failed to Delete Data",
+				"result": "Failed to Delete Data",
 			}
-		}else{
+		} else {
 			result = gin.H{
-				"status" : "ok",
-				"result" : "data with id :"+ id + " deleted successfully",
-
+				"status": "ok",
+				"result": "data with id :" + id + " deleted successfully",
 			}
 		}
 	}
