@@ -46,21 +46,31 @@ func (idb *InDB) GetOrang(c *gin.Context) {
 	var (
 		orang2 []structs.Orang
 		result gin.H
+		data   dataJSON
+		orang  structs.Orang
 	)
 	// id := c.Param("id")
-	idb.DB.Preload("Kelompok").Find(&orang2)
-
+	if err := c.BindQuery(&data); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	}
+	orang.Alamat = data.Alamat
+	orang.Nama_lengkap = data.Nama_lengkap
+	orang.Status = data.Status
+	orang.KelompokID = data.KelompokID
+	idb.DB.Preload("Kelompok").Where(&orang).Find(&orang2)
 	if len(orang2) <= 0 {
 		result = gin.H{
-			"status": "Not Found",
-			"result": nil,
-			"count":  0,
+			"status":  "Not Found",
+			"result":  nil,
+			"result2": data,
+			"count":   0,
 		}
 	} else {
 		result = gin.H{
-			"status": "OK",
-			"result": orang2,
-			"count":  len(orang2),
+			"status":  "OK",
+			"result":  orang2,
+			"result2": data,
+			"count":   len(orang2),
 		}
 	}
 	c.JSON(http.StatusOK, result)

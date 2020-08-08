@@ -8,7 +8,7 @@ import (
 )
 
 type kesibukanJSON struct {
-	status     string `json:"status" form:"status"`
+	Status     string `json:"status" form:"status"`
 	Kedudukan  string `json:"kedudukan" form:"kedudukan"`
 	InstansiId uint   `json:"instansiId" form:"instansiId"`
 	OrangId    uint   `json:"orangId" form:"orangId"`

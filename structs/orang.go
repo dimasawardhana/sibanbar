@@ -8,12 +8,12 @@ import (
 
 type Orang struct {
 	gorm.Model
-	Nama_lengkap  string
-	Alamat        string
-	Tempat_lahir  string
-	Tanggal_lahir time.Time
-	Status        string
-	Photo         string
-	Kelompok      Group `gorm:"foreignKey:KelompokID;association_foreignkey:Id"`
-	KelompokID    uint
+	Nama_lengkap  string    `json:"nama" form:"nama"`
+	Alamat        string    `json:"alamat" form:"alamat"`
+	Tempat_lahir  string    `json:"tempat_lahir" form:"tempat_lahir"`
+	Tanggal_lahir time.Time `json:"tanggal_lahir" form:"tanggal_lahir"`
+	Status        string    `json:"status" form:"status"`
+	Photo         string    `json:"photo" form:"photo"`
+	Kelompok      Group     `gorm:"foreignKey:KelompokID;association_foreignkey:Id"`
+	KelompokID    uint      `json:"kelompokId" form:"kelompokId"`
 }
