@@ -1,8 +1,8 @@
 package main
 
 import (
-	"./config"
-	"./controllers"
+	"github.com/dimasawardhana/sibanbar/config"
+	"github.com/dimasawardhana/sibanbar/controllers"
 	"github.com/gin-gonic/gin"
 )
 

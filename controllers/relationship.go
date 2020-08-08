@@ -3,7 +3,7 @@ package controllers
 import (
 	"net/http"
 
-	"../structs"
+	"github.com/dimasawardhana/sibanbar/structs"
 	"github.com/gin-gonic/gin"
 )
 
