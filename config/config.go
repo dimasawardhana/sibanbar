@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"../structs"
+	"github.com/dimasawardhana/sibanbar/structs"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/joho/godotenv"
