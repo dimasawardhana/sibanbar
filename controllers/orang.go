@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"time"
 
-	"../structs"
+	"github.com/dimasajiwardhana/sibanbar/structs"
 	"github.com/gin-gonic/gin"
 )
 
