@@ -1,1 +1,1 @@
-web: currency
+web: SI_banbar
