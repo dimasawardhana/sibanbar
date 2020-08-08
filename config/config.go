@@ -22,7 +22,7 @@ func DBInit() *gorm.DB {
 	port := os.Getenv("MYSQL_PORT")
 	sqldb := os.Getenv("MYSQL_DB")
 
-	settings := userpass + `@tcp(` + hostname + ":" + port + ")/" + sqldb + "?charset=utf8&parseTime=True&loc=Local"
+	settings := userpass + `@tcp(` + hostname + ":" + port + ")/" + sqldb + "?reconnect=true&charset=utf8&parseTime=True&loc=Local"
 	// db, err := gorm.Open("mysql", "eizrael"+":"+"mysqlPengalaman354"+"@tcp("+"localhost"+":"+"3306"+")/"+"siibanbar"+"?charset=utf8&parseTime=True&loc=Local")
 	db, err := gorm.Open("mysql", settings)
 	if err != nil {
