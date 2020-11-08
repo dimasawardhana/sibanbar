@@ -19,8 +19,22 @@ func (idb *InDB) GetKehadiran(c *gin.Context) {
 	var (
 		kehadiran []structs.Kehadiran
 		result    gin.H
+		data      kehadiranJSON
+		toQuery   structs.Kehadiran
 	)
-	idb.DB.Preload("Event").Preload("Orang").Preload("Orang.Kelompok").Find(&kehadiran)
+	if err := c.BindQuery(&data); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	}
+	toQuery.Keterangan = data.Keterangan
+	toQuery.EventID = data.EventId
+	toQuery.OrangID = data.OrangId
+
+	idb.DB.
+		Preload("Event").
+		Preload("Orang").
+		Preload("Orang.Kelompok").
+		Where(toQuery).
+		Find(&kehadiran)
 
 	if len(kehadiran) < 0 {
 		result = gin.H{

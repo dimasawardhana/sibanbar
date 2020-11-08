@@ -18,8 +18,21 @@ func (idb *InDB) GetKesibukan(c *gin.Context) {
 	var (
 		kesibukan []structs.Kesibukan
 		result    gin.H
+		data      kesibukanJSON
+		toQuery   structs.Kesibukan
 	)
-	idb.DB.Preload("instansi").Preload("Orang").Find(&kesibukan)
+	if err := c.BindQuery(&data); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	}
+	toQuery.Status = data.Status
+	toQuery.Kedudukan = data.Kedudukan
+	toQuery.InstansiID = data.InstansiId
+	toQuery.OrangID = data.OrangId
+	idb.DB.
+		Preload("instansi").
+		Preload("Orang").
+		Where(toQuery).
+		Find(&kesibukan)
 
 	if len(kesibukan) < 0 {
 		result = gin.H{

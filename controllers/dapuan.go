@@ -15,10 +15,22 @@ type dapuanJSON struct {
 
 func (idb *InDB) GetDapuan(c *gin.Context) {
 	var (
-		dapuan []structs.Dapuan
-		result gin.H
+		dapuan  []structs.Dapuan
+		result  gin.H
+		data    dapuanJSON
+		toQuery structs.Dapuan
 	)
-	idb.DB.Preload("Grup").Preload("Orang").Find(&dapuan)
+	if err := c.BindQuery(&data); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	}
+	toQuery.Dapuan = data.Dapuan
+	toQuery.OrangID = data.OrangId
+	toQuery.GrupID = data.GrupId
+	idb.DB.
+		Preload("Grup").
+		Preload("Orang").
+		Where(toQuery).
+		Find(&dapuan)
 
 	if len(dapuan) < 0 {
 		result = gin.H{

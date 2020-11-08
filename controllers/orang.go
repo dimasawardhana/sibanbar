@@ -16,6 +16,9 @@ type dataJSON struct {
 	Status        string `json:"status" form:"status"`
 	Photo         string `json:"photo" form:"photo"`
 	KelompokID    uint   `json:"kelompokId" form:"kelompokId"`
+	Phone         string `json:"phone" form:"phone"`
+	Email         string `json:"email" form:"email"`
+	JenisKelamin  string `json:"jenis_kelamin" form:"jenis_kelamin"`
 }
 
 func (idb *InDB) GetOrangById(c *gin.Context) {
@@ -94,6 +97,9 @@ func (idb *InDB) CreateOrang(c *gin.Context) {
 		orang.Photo = data.Photo
 		err := idb.DB.Where("id = ?", data.KelompokID).First(&orang.Kelompok).Error
 		orang.KelompokID = data.KelompokID
+		orang.Phone = data.Phone
+		orang.Email = data.Email
+		orang.Jenis_kelamin = data.JenisKelamin
 		if err != nil {
 			result = gin.H{
 				"status": "failed",
@@ -147,6 +153,10 @@ func (idb *InDB) UpdateOrang(c *gin.Context) {
 			orang.Tanggal_lahir = t
 			orang.Status = data.Status
 			orang.Photo = data.Photo
+			orang.Phone = data.Phone
+			orang.Email = data.Email
+			orang.Jenis_kelamin = data.JenisKelamin
+
 			err := idb.DB.Where("id = ?", data.KelompokID).First(&orang.Kelompok).Error
 			if err != nil {
 				result = gin.H{

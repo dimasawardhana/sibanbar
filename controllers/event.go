@@ -19,10 +19,19 @@ type eventJSON struct {
 
 func (idb *InDB) GetEvent(c *gin.Context) {
 	var (
-		event  []structs.Event
-		result gin.H
+		event   []structs.Event
+		result  gin.H
+		data    eventJSON
+		toQuery structs.Event
 	)
-	idb.DB.Find(&event)
+	if err := c.BindQuery(&data); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	}
+	toQuery.Nama = data.Nama
+	toQuery.Tempat = data.Tempat
+	idb.DB.
+		Where(toQuery).
+		Find(&event)
 
 	if len(event) < 0 {
 		result = gin.H{

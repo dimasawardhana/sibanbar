@@ -16,8 +16,20 @@ func (idb *InDB) GetInstansi(c *gin.Context) {
 	var (
 		instansi []structs.Instansi
 		result   gin.H
+		data     dataInstansi
+		toQuery  structs.Instansi
 	)
-	idb.DB.Find(&instansi)
+	if err := c.BindQuery(&data); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	}
+	toQuery.Nama_Instansi = data.Nama
+	toQuery.Alamat_Instansi = data.Alamat
+
+	idb.
+		DB.
+		Where(toQuery).
+		Find(&instansi)
+
 	if len(instansi) > 0 {
 		result = gin.H{
 			"status": "Not Found",

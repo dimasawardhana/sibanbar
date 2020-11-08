@@ -17,8 +17,18 @@ func (idb *InDB) GetRelationship(c *gin.Context) {
 	var (
 		relationship []structs.Relationship
 		result       gin.H
+		data         relationshipJSON
+		toQuery      structs.Relationship
 	)
-	idb.DB.Preload("To").Preload("From").Find(&relationship)
+	if err := c.BindQuery(&data); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	}
+	toQuery.IdFrom = data.IdFrom
+	toQuery.IdTo = data.IdFrom
+	idb.DB.
+		Preload("Orang").
+		Where(toQuery).
+		Find(&relationship)
 
 	if len(relationship) < 0 {
 		result = gin.H{

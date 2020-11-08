@@ -17,9 +17,19 @@ func (idb *InDB) GetUsers(c *gin.Context) {
 	var (
 		users  []structs.User
 		result gin.H
+		user   structs.User
+		data   orangJSON
 	)
-
-	idb.DB.Preload("Orang").Find(&users)
+	if err := c.BindQuery(&data); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	}
+	user.Username = data.Username
+	user.Password = data.Password
+	user.OrangID = data.OrangID
+	idb.DB.
+		Preload("Orang").
+		Where(&user).
+		Find(&users)
 
 	if len(users) > 0 {
 		result = gin.H{

@@ -19,11 +19,22 @@ type dataGroup struct {
 
 func (idb *InDB) GetGroup(c *gin.Context) {
 	var (
-		result gin.H
-		grup   []structs.Group
+		result  gin.H
+		grup    []structs.Group
+		toQuery structs.Group
+		data    dataGroup
 	)
-
-	idb.DB.Preload("Parent_group").Find(&grup)
+	if err := c.BindQuery(&data); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	}
+	toQuery.Nama = data.Nama
+	toQuery.Masjid = data.Masjid
+	toQuery.Group_type = data.Group_type
+	toQuery.ParentID = data.ParentId
+	idb.DB.
+		Preload("Parent_group").
+		Where(toQuery).
+		Find(&grup)
 	if len(grup) > 0 {
 		result = gin.H{
 			"status": "ok",

@@ -10,15 +10,16 @@ func main() {
 	db := config.DBInit()
 	inDB := &controllers.InDB{DB: db}
 	router := gin.Default()
-	apiVersion := "/api/v1.0"
+	apiVersion := "/api/v1"
 	router.GET("/coba", inDB.DebugAPI)
+	router.Use(config.CORSMiddleware())
 	_orang := router.Group(apiVersion + "/orang")
 	{
-		_orang.GET("/all/", inDB.GetOrang)
-		_orang.GET("/byId/:id", inDB.GetOrangById)
-		_orang.DELETE(":id", inDB.DeleteOrang)
-		_orang.POST("/create", inDB.CreateOrang)
-		_orang.PUT("/update/:id", inDB.UpdateOrang)
+		_orang.GET("", inDB.GetOrang)
+		_orang.GET("/:id", inDB.GetOrangById)
+		_orang.DELETE("/:id", inDB.DeleteOrang)
+		_orang.POST("", inDB.CreateOrang)
+		_orang.PUT("/:id", inDB.UpdateOrang)
 	}
 	_group := router.Group(apiVersion + "/group")
 	{
@@ -32,59 +33,59 @@ func main() {
 	}
 	_instansi := router.Group(apiVersion + "/instansi")
 	{
-		_instansi.GET("/all/", inDB.GetInstansi)
-		_instansi.GET("/byId/:id", inDB.GetInstansiById)
+		_instansi.GET("", inDB.GetInstansi)
+		_instansi.GET("/:id", inDB.GetInstansiById)
 		_instansi.DELETE("/:id", inDB.DeleteInstansi)
-		_instansi.POST("/create", inDB.CreateInstansi)
-		_instansi.PUT("/update/:id", inDB.UpdateInstansi)
+		_instansi.POST("", inDB.CreateInstansi)
+		_instansi.PUT("/:id", inDB.UpdateInstansi)
 	}
 	_user := router.Group(apiVersion + "/user")
 	{
-		_user.GET("/all/", inDB.GetUsers)
-		_user.GET("/byId/:id", inDB.GetUserById)
+		_user.GET("", inDB.GetUsers)
+		_user.GET("/:id", inDB.GetUserById)
 		_user.DELETE("/:id", inDB.DeleteUser)
-		_user.POST("/create", inDB.CreateUser)
-		_user.PUT("/update/:id", inDB.UpdateUser)
+		_user.POST("", inDB.CreateUser)
+		_user.PUT("/:id", inDB.UpdateUser)
 	}
 	_kesibukan := router.Group(apiVersion + "/kesibukan")
 	{
-		_kesibukan.GET("/all/", inDB.GetKesibukan)
-		_kesibukan.GET("/byId/:id", inDB.GetKesibukanById)
+		_kesibukan.GET("", inDB.GetKesibukan)
+		_kesibukan.GET("/:id", inDB.GetKesibukanById)
 		_kesibukan.DELETE("/:id", inDB.DeleteKesibukan)
-		_kesibukan.POST("/create", inDB.CreateKesibukan)
-		_kesibukan.PUT("/update/:id", inDB.UpdateKesibukan)
+		_kesibukan.POST("", inDB.CreateKesibukan)
+		_kesibukan.PUT("/:id", inDB.UpdateKesibukan)
 	}
 	_relationship := router.Group(apiVersion + "/relationship")
 	{
-		_relationship.GET("/all/", inDB.GetRelationship)
-		_relationship.GET("/byId/:id", inDB.GetRelationshipById)
+		_relationship.GET("", inDB.GetRelationship)
+		_relationship.GET("/:id", inDB.GetRelationshipById)
 		_relationship.DELETE("/:id", inDB.DeleteRelationship)
-		_relationship.POST("/create", inDB.CreateRelationship)
-		_relationship.PUT("/update/:id", inDB.UpdateRelationship)
+		_relationship.POST("", inDB.CreateRelationship)
+		_relationship.PUT("/:id", inDB.UpdateRelationship)
 	}
 	_event := router.Group(apiVersion + "/event")
 	{
-		_event.GET("/all/", inDB.GetEvent)
-		_event.GET("/byId/:id", inDB.GetEventById)
+		_event.GET("", inDB.GetEvent)
+		_event.GET("/:id", inDB.GetEventById)
 		_event.DELETE("/:id", inDB.DeleteEvent)
-		_event.POST("/create", inDB.CreateEvent)
-		_event.PUT("/update/:id", inDB.UpdateEvent)
+		_event.POST("", inDB.CreateEvent)
+		_event.PUT("/:id", inDB.UpdateEvent)
 	}
 	_kehadiran := router.Group(apiVersion + "/kehadiran")
 	{
-		_kehadiran.GET("/all/", inDB.GetKehadiran)
-		_kehadiran.GET("/byId/:id", inDB.GetKehadiranById)
+		_kehadiran.GET("", inDB.GetKehadiran)
+		_kehadiran.GET("/:id", inDB.GetKehadiranById)
 		_kehadiran.DELETE("/:id", inDB.DeleteKehadiran)
-		_kehadiran.POST("/create", inDB.CreateKehadiran)
-		_kehadiran.PUT("/update/:id", inDB.UpdateKehadiran)
+		_kehadiran.POST("", inDB.CreateKehadiran)
+		_kehadiran.PUT("/:id", inDB.UpdateKehadiran)
 	}
 	_dapuan := router.Group(apiVersion + "/dapuan")
 	{
-		_dapuan.GET("/all/", inDB.GetDapuan)
-		_dapuan.GET("/byId/:id", inDB.GetDapuanById)
+		_dapuan.GET("", inDB.GetDapuan)
+		_dapuan.GET("/:id", inDB.GetDapuanById)
 		_dapuan.DELETE("/:id", inDB.DeleteDapuan)
-		_dapuan.POST("/create", inDB.CreateDapuan)
-		_dapuan.PUT("/update/:id", inDB.UpdateDapuan)
+		_dapuan.POST("", inDB.CreateDapuan)
+		_dapuan.PUT("/:id", inDB.UpdateDapuan)
 	}
 	router.Run(":3000")
 }
