@@ -23,13 +23,13 @@ func main() {
 	}
 	_group := router.Group(apiVersion + "/group")
 	{
-		_group.GET("/all/", inDB.GetGroup)
-		_group.GET("/byId/:id", inDB.GetGroupByID)
-		_group.GET("/byType/:type", inDB.GetGroupByType)
-		_group.GET("/byParentId/:id", inDB.GetGroupByParentId)
+		_group.GET("", inDB.GetGroup)
+		_group.GET("/:id", inDB.GetGroupByID)
+		// _group.GET("/byType/:type", inDB.GetGroupByType)
+		// _group.GET("/byParentId/:id", inDB.GetGroupByParentId)
 		_group.DELETE("/:id", inDB.DeleteGroup)
-		_group.POST("/create", inDB.CreateGroup)
-		_group.PUT("/update/:id", inDB.UpdateGroup)
+		_group.POST("", inDB.CreateGroup)
+		_group.PUT("/:id", inDB.UpdateGroup)
 	}
 	_instansi := router.Group(apiVersion + "/instansi")
 	{

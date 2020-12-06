@@ -144,7 +144,7 @@ func (idb *InDB) CreateGroup(c *gin.Context) {
 		}
 	} else {
 		res = gin.H{
-			"status": "OK",
+			"status": "ok",
 			"result": grup,
 		}
 	}
@@ -154,7 +154,7 @@ func (idb *InDB) CreateGroup(c *gin.Context) {
 func (idb *InDB) UpdateGroup(c *gin.Context) {
 	var (
 		grup structs.Group
-		lama structs.Group
+		// lama structs.Group
 		data dataGroup
 		res  gin.H
 	)
@@ -174,7 +174,7 @@ func (idb *InDB) UpdateGroup(c *gin.Context) {
 			"error":  errs,
 		}
 	} else {
-		lama = grup
+		// lama = grup
 		grup.Nama = data.Nama
 		grup.Masjid = data.Masjid
 		grup.Masjid_lang = data.Masjid_lang
@@ -185,15 +185,15 @@ func (idb *InDB) UpdateGroup(c *gin.Context) {
 		errss := idb.DB.Save(grup).Error
 		if errss != nil {
 			res = gin.H{
-				"status": "UpdateFailed",
+				"status": "failed",
 				"error":  errss,
 			}
 		} else {
 			res = gin.H{
 				"status": "ok",
 				"result": "data updated",
-				"before": lama,
-				"data":   grup,
+				// "before": lama,
+				// "data":   grup,
 			}
 		}
 
@@ -216,7 +216,7 @@ func (idb *InDB) DeleteGroup(c *gin.Context) {
 		err = idb.DB.Delete(&grup).Error
 		if err != nil {
 			res = gin.H{
-				"status": "failed to delete",
+				"status": "failed",
 				"result": "error",
 				"error":  err,
 			}
@@ -224,7 +224,6 @@ func (idb *InDB) DeleteGroup(c *gin.Context) {
 			res = gin.H{
 				"status": "ok",
 				"result": "data deleted successfully",
-				"error":  err,
 			}
 		}
 	}
@@ -232,7 +231,7 @@ func (idb *InDB) DeleteGroup(c *gin.Context) {
 }
 func notFound(dor gin.H) gin.H {
 	return gin.H{
-		"status": "Not Found",
+		"status": "not found",
 		"result": dor,
 	}
 }

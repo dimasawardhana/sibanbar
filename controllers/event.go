@@ -35,15 +35,12 @@ func (idb *InDB) GetEvent(c *gin.Context) {
 
 	if len(event) < 0 {
 		result = gin.H{
-			"status": "Not Found",
-			"count":  0,
-			"result": gin.H{
-				"event": event,
-			},
+			"status": "failed",
+			"result" : "not found",
 		}
 	} else {
 		result = gin.H{
-			"status": "OK",
+			"status": "ok",
 			"count":  len(event),
 			"result": gin.H{
 				"event": event,
@@ -64,7 +61,8 @@ func (idb *InDB) GetEventById(c *gin.Context) {
 
 	if err != nil {
 		result = gin.H{
-			"status": "Not Found",
+			"status": "failed",
+			"result" : "not found",
 			"error":  err,
 		}
 	} else {
@@ -100,7 +98,7 @@ func (idb *InDB) CreateEvent(c *gin.Context) {
 		if ers != nil {
 			result = gin.H{
 				"status": "failed",
-				"result": event,
+				"result": "parsing data error",
 				"error":  ers,
 			}
 		} else {
@@ -118,7 +116,7 @@ func (idb *InDB) CreateEvent(c *gin.Context) {
 func (idb *InDB) UpdateEvent(c *gin.Context) {
 	var (
 		result    gin.H
-		eventLama structs.Event
+		// eventLama structs.Event
 		eventBaru structs.Event
 		data      eventJSON
 	)
@@ -130,11 +128,11 @@ func (idb *InDB) UpdateEvent(c *gin.Context) {
 		if err != nil {
 			result = gin.H{
 				"status": "failed",
-				"result": "Data Not Found",
+				"result": "data not found",
 				"errors": err,
 			}
 		} else {
-			eventLama = eventBaru
+			// eventLama = eventBaru
 			eventBaru.Nama = data.Nama
 			eventBaru.Tempat = data.Tempat
 			t, ers := time.Parse("2006-01-02", data.Tanggal)
@@ -154,14 +152,14 @@ func (idb *InDB) UpdateEvent(c *gin.Context) {
 			} else {
 				if errs != nil {
 					result = gin.H{
-						"status": "Failed",
+						"status": "failed",
 						"result": "failed update",
 						"error":  errs,
 					}
 				} else {
 					result = gin.H{
-						"status": "OK",
-						"before": eventLama,
+						"status": "ok",
+						// "before": eventLama,
 						"result": eventBaru,
 					}
 				}
@@ -184,8 +182,8 @@ func (idb *InDB) DeleteEvent(c *gin.Context) {
 
 	if err != nil {
 		result = gin.H{
-			"status": "Not Found",
-			"result": "Data Not Found",
+			"status": "failed",
+			"result": "data not found",
 		}
 	} else {
 		errs := idb.DB.Delete(&event).Error

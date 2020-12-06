@@ -34,7 +34,7 @@ func (idb *InDB) GetDapuan(c *gin.Context) {
 
 	if len(dapuan) < 0 {
 		result = gin.H{
-			"status": "Not Found",
+			"status": "not found",
 			"count":  0,
 			"result": gin.H{
 				"dapuan": dapuan,
@@ -42,7 +42,7 @@ func (idb *InDB) GetDapuan(c *gin.Context) {
 		}
 	} else {
 		result = gin.H{
-			"status": "OK",
+			"status": "ok",
 			"count":  len(dapuan),
 			"result": gin.H{
 				"dapuan": dapuan,
@@ -62,7 +62,8 @@ func (idb *InDB) GetDapuanById(c *gin.Context) {
 
 	if err != nil {
 		result = gin.H{
-			"status": "Not Found",
+			"status": "failed",
+			"result" : "not found",
 			"error":  err,
 		}
 	} else {
@@ -106,7 +107,7 @@ func (idb *InDB) CreateDapuan(c *gin.Context) {
 func (idb *InDB) UpdateDapuan(c *gin.Context) {
 	var (
 		result     gin.H
-		dapuanLama structs.Dapuan
+		// dapuanLama structs.Dapuan
 		dapuanBaru structs.Dapuan
 		data       dapuanJSON
 	)
@@ -118,11 +119,11 @@ func (idb *InDB) UpdateDapuan(c *gin.Context) {
 		if err != nil {
 			result = gin.H{
 				"status": "failed",
-				"result": "Data Not Found",
+				"result": "not found",
 				"errors": err,
 			}
 		} else {
-			dapuanLama = dapuanBaru
+			// dapuanLama = dapuanBaru
 			dapuanBaru.Dapuan = data.Dapuan
 			dapuanBaru.OrangID = data.OrangId
 			idb.DB.First(&dapuanBaru.Orang, dapuanBaru.OrangID)
@@ -133,14 +134,14 @@ func (idb *InDB) UpdateDapuan(c *gin.Context) {
 			errs := idb.DB.Save(&dapuanBaru).Error
 			if errs != nil {
 				result = gin.H{
-					"status": "Failed",
-					"result": "failed update",
+					"status": "failed",
+					"result": "update failed",
 					"error":  errs,
 				}
 			} else {
 				result = gin.H{
-					"status": "OK",
-					"before": dapuanLama,
+					"status": "ok",
+					// "before": dapuanLama,
 					"result": dapuanBaru,
 				}
 			}
@@ -162,20 +163,20 @@ func (idb *InDB) DeleteDapuan(c *gin.Context) {
 
 	if err != nil {
 		result = gin.H{
-			"status": "Not Found",
-			"result": "Data Not Found",
+			"status": "failed",
+			"result": "data not found",
 		}
 	} else {
 		errs := idb.DB.Delete(&dapuan).Error
 		if errs != nil {
 			result = gin.H{
-				"status": "Failed",
-				"result": "Failed to Delete Data",
+				"status": "failed",
+				"result": "failed to delete data",
 			}
 		} else {
 			result = gin.H{
 				"status": "ok",
-				"result": "data with id :" + id + " deleted successfully",
+				"result": "data deleted successfully",
 			}
 		}
 	}

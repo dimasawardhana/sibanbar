@@ -31,15 +31,13 @@ func (idb *InDB) GetOrangById(c *gin.Context) {
 
 	if err != nil {
 		result = gin.H{
-			"status": "ERROR",
-			"result": err.Error(),
-			"count":  0,
+			"status": STATUS_ERROR,
+			"result": err.Error(),			
 		}
 	} else {
 		result = gin.H{
-			"status": "OK",
+			"status": STATUS_OK,
 			"result": orang,
-			"count":  1,
 		}
 	}
 	c.JSON(http.StatusOK, result)
@@ -63,16 +61,13 @@ func (idb *InDB) GetOrang(c *gin.Context) {
 	idb.DB.Preload("Kelompok").Where(&orang).Find(&orang2)
 	if len(orang2) <= 0 {
 		result = gin.H{
-			"status":  "Not Found",
-			"result":  nil,
-			"result2": data,
+			"status": STATUS_FAILED,
 			"count":   0,
 		}
 	} else {
 		result = gin.H{
-			"status":  "OK",
+			"status":  STATUS_OK,
 			"result":  orang2,
-			"result2": data,
 			"count":   len(orang2),
 		}
 	}
@@ -102,25 +97,27 @@ func (idb *InDB) CreateOrang(c *gin.Context) {
 		orang.Jenis_kelamin = data.JenisKelamin
 		if err != nil {
 			result = gin.H{
-				"status": "failed",
+				"status": STATUS_ERROR,
 				"result": orang,
 				"error":  err,
 			}
+			c.JSON(http.StatusBadRequest, result)
 		}
 		if errs != nil {
 			result = gin.H{
-				"status": "failed",
-				"result": orang,
+				"status": STATUS_FAILED,
 				"error":  errs,
 			}
+			c.JSON(http.StatusBadRequest, result)
 		} else {
 			idb.DB.Create(&orang)
 			result = gin.H{
-				"status": "ok",
+				"status": STATUS_OK,
 				"result": orang,
 			}
+			c.JSON(http.StatusOK, result)
 		}
-		c.JSON(http.StatusOK, result)
+		
 	}
 }
 func (idb *InDB) UpdateOrang(c *gin.Context) {
@@ -140,7 +137,7 @@ func (idb *InDB) UpdateOrang(c *gin.Context) {
 		errors := idb.DB.First(&orang, id).Error
 		if errors != nil {
 			result = gin.H{
-				"status": "failed",
+				"status": STATUS_FAILED,
 				"result": errors,
 			}
 			c.JSON(http.StatusOK, result)
@@ -156,32 +153,32 @@ func (idb *InDB) UpdateOrang(c *gin.Context) {
 			orang.Phone = data.Phone
 			orang.Email = data.Email
 			orang.Jenis_kelamin = data.JenisKelamin
-
-			err := idb.DB.Where("id = ?", data.KelompokID).First(&orang.Kelompok).Error
-			if err != nil {
-				result = gin.H{
-					"status": "not found group",
-					"result": orang,
-					"error":  err,
-				}
-			}
 			if errs != nil {
 				result = gin.H{
-					"status": "failed",
+					"status": STATUS_ERROR,
 					"result": "failed on parsing time",
 					"error":  errs,
 				}
 			}
+			err := idb.DB.Where("id = ?", data.KelompokID).First(&orang.Kelompok).Error
+			if err != nil {
+				result = gin.H{
+					"status": STATUS_FAILED,
+					"result": orang,
+					"error":  err,
+				}
+			}
+			
 			errs = idb.DB.Save(&orang).Error
 			if errs != nil {
 				result = gin.H{
-					"status": "failed",
+					"status": STATUS_FAILED,
 					"result": "update failed",
 					"errs":   errs,
 				}
 			} else {
 				result = gin.H{
-					"status":        "ok",
+					"status":        STATUS_OK,
 					"beforeUpdated": lama,
 					"result":        orang,
 				}
@@ -201,20 +198,20 @@ func (idb *InDB) DeleteOrang(c *gin.Context) {
 	err := idb.DB.First(&orang, id).Error
 	if err != nil {
 		result = gin.H{
-			"status": "Not Found",
-			"result": "Data Not Found",
+			"status": STATUS_FAILED,
+			"result": "data not found",
 		}
 	}
 	err = idb.DB.Delete(&orang).Error
 	if err != nil {
 		result = gin.H{
-			"status": "Failed",
-			"result": "Delete Failed",
+			"status": STATUS_FAILED,
+			"result": "delete failed",
 		}
 	} else {
 		result = gin.H{
-			"status": "OK",
-			"result": "Data " + id + " deleted successfully",
+			"status": STATUS_OK,
+			"result": "data deleted successfully",
 		}
 	}
 	c.JSON(http.StatusOK, result)
