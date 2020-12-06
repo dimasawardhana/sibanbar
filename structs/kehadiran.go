@@ -10,8 +10,8 @@ type Kehadiran struct {
 	gorm.Model
 	Jam_hadir  time.Time `json:"jam_hadir" form:"jam_hadir"`
 	Keterangan string `json:"keterangan" form:"keterangan"`
-	Event      Event `gorm:"foreignkey:EventID;association_foreignkey:Id"`
+	Event      Event `gorm:"foreignkey:EventID;association_foreignkey:Id" json:"event" form:"event"`
 	EventID    uint `json:"event_id" form:"event_id"`
-	Orang      Orang `gorm:"foreignkey:OrangID;association_foreignkey:Id"`
+	Orang      Orang `gorm:"foreignkey:OrangID;association_foreignkey:Id" json:"orang" form:"orang"`
 	OrangID    uint `json:"orang_id" form:"orang_id"`
 }

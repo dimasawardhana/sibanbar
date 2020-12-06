@@ -6,6 +6,6 @@ type User struct{
 	gorm.Model
 	Username string `gorm:"size:255;unique;not null" json:"username" form:"username"`
 	Password string `gorm:"size:255;not null" json:"password" form:"password"`
-	Orang Orang `gorm:"foreignkey:OrangID;association_foreignkey:Id"`
+	Orang Orang `gorm:"foreignkey:OrangID;association_foreignkey:Id" json:"orang" form:"orang"`
 	OrangID uint `json:"orang_id" form:"orang_id"`
 }
