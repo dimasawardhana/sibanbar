@@ -13,7 +13,7 @@ type eventJSON struct {
 	Tempat      string  `json:"tempat" form:"tempat"`
 	Tanggal     string  `json:"tanggal" form:"tanggal"`
 	Tempat_lat  float64 `json:"tempat_lat" form:"tempat_lat"`
-	Tempat_lang float64 `json:"tempat_lang" form:"tempat_lang"`
+	Tempat_long float64 `json:"tempat_long" form:"tempat_long"`
 	Poster      string  `json:"poster" form:"poster"`
 }
 
@@ -92,7 +92,7 @@ func (idb *InDB) CreateEvent(c *gin.Context) {
 		t, ers := time.Parse("2006-01-02", data.Tanggal)
 		event.Tanggal = t
 		event.Tempat_lat = data.Tempat_lat
-		event.Tempat_lang = data.Tempat_lang
+		event.Tempat_long = data.Tempat_long
 		event.Poster = data.Poster
 
 		if ers != nil {
@@ -138,7 +138,7 @@ func (idb *InDB) UpdateEvent(c *gin.Context) {
 			t, ers := time.Parse("2006-01-02", data.Tanggal)
 			eventBaru.Tanggal = t
 			eventBaru.Tempat_lat = data.Tempat_lat
-			eventBaru.Tempat_lang = data.Tempat_lang
+			eventBaru.Tempat_long = data.Tempat_long
 			eventBaru.Poster = data.Poster
 
 			// errs := idb.DB.Model(&eventLama).Updates(eventBaru).Error

@@ -9,6 +9,6 @@ type Event struct{
 	Tanggal time.Time `json:"tanggal" form:"tanggal"`
 	Tempat string `json:"tempat" form:"tempat"`
 	Tempat_lat float64 `json:"tempat_lat" form:"tempat_lat"`
-	Tempat_lang float64 `json:"tempat_lang" form:"tempat_lang"`
+	Tempat_long float64 `json:"tempat_long" form:"tempat_long"`
 	Poster string `json:"poster" form:"poster"`
 }

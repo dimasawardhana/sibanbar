@@ -7,12 +7,18 @@ import (
 )
 
 func main() {
-	db := config.DBInit()
-	inDB := &controllers.InDB{DB: db}
+	confConst := config.InitConst()
+	db := config.DBInit(confConst.Mysql)
+	minio := config.MinioInit(confConst.Minio)
+	inDB := &controllers.InDB{DB: db, Minio: minio, MinioConf: confConst.Minio}
 	router := gin.Default()
 	apiVersion := "/api/v1"
 	router.GET("/coba", inDB.DebugAPI)
 	router.Use(config.CORSMiddleware())
+	_upload := router.Group(apiVersion+"/upload")
+	{
+		_upload.PUT("", inDB.UploadImage )
+	}
 	_orang := router.Group(apiVersion + "/orang")
 	{
 		_orang.GET("", inDB.GetOrang)
@@ -24,9 +30,7 @@ func main() {
 	_group := router.Group(apiVersion + "/group")
 	{
 		_group.GET("", inDB.GetGroup)
-		_group.GET("/:id", inDB.GetGroupByID)
-		// _group.GET("/byType/:type", inDB.GetGroupByType)
-		// _group.GET("/byParentId/:id", inDB.GetGroupByParentId)
+		_group.GET("/:id", inDB.GetGroupByID)		
 		_group.DELETE("/:id", inDB.DeleteGroup)
 		_group.POST("", inDB.CreateGroup)
 		_group.PUT("/:id", inDB.UpdateGroup)

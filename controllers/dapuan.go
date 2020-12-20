@@ -123,7 +123,6 @@ func (idb *InDB) UpdateDapuan(c *gin.Context) {
 				"errors": err,
 			}
 		} else {
-			// dapuanLama = dapuanBaru
 			dapuanBaru.Dapuan = data.Dapuan
 			dapuanBaru.OrangID = data.OrangId
 			idb.DB.First(&dapuanBaru.Orang, dapuanBaru.OrangID)

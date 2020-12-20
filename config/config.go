@@ -2,32 +2,23 @@ package config
 
 import (
 	"log"
-	"os"
 
 	"github.com/dimasawardhana/sibanbar/structs"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
-	"github.com/joho/godotenv"
+	"github.com/minio/minio-go/v7"
+	"github.com/minio/minio-go/v7/pkg/credentials"
 )
 
-func DBInit() *gorm.DB {
-	errs := godotenv.Load()
-	if errs != nil {
-		log.Fatal("Error loading .env file")
-	}
-	// user := os.Getenv("MYSQL_USERNAME")
-	// pass := os.Getenv("MYSQL_PASSWORD")
-	userpass := os.Getenv("MYSQL_USERPASS")
-	hostname := os.Getenv("MYSQL_HOSTNAME")
-	port := os.Getenv("MYSQL_PORT")
-	sqldb := os.Getenv("MYSQL_DB")
-
+func DBInit(Mysql MysqlConst) *gorm.DB {
+	userpass := Mysql.Userpass
+	hostname := Mysql.Host
+	port := Mysql.Port
+	sqldb := Mysql.DB
 	settings := userpass + `@tcp(` + hostname + ":" + port + ")/" + sqldb + "?charset=utf8&parseTime=True&loc=Local"
-	// db, err := gorm.Open("mysql", "eizrael"+":"+"mysqlPengalaman354"+"@tcp("+"localhost"+":"+"3306"+")/"+"siibanbar"+"?charset=utf8&parseTime=True&loc=Local")
 	db, err := gorm.Open("mysql", settings)
 	if err != nil {
-		// panic("failed to connect to database")
 		panic(err)
 	}
 
@@ -48,4 +39,15 @@ func CORSMiddleware() gin.HandlerFunc {
 
 		c.Next()
 	}
+}
+func MinioInit(minioConst MinioConst) *minio.Client{
+	useSSL := false
+	minioClient, err := minio.New(minioConst.Host, &minio.Options{
+		Creds:  credentials.NewStaticV4(minioConst.AccessKey, minioConst.SecretKey, ""),
+		Secure: useSSL,
+	})
+	if err != nil {
+		log.Fatal(err, "shit")
+	}
+	return minioClient
 }

@@ -10,7 +10,7 @@ import (
 type dataGroup struct {
 	Nama        string  `json:"nama" form:"nama"`
 	Masjid      string  `json:"masjid" form:"masjid"`
-	Masjid_lang float64 `json:"masjid_lang" form:"masjid_lang"`
+	Masjid_long float64 `json:"masjid_long" form:"masjid_long"`
 	Masjid_lat  float64 `json:"masjid_lat" form:"masjid_lat"`
 	Alamat      string  `json:"alamat" form:"alamat"`
 	Group_type  string  `json:"group_type" form:"group_type"`
@@ -129,7 +129,7 @@ func (idb *InDB) CreateGroup(c *gin.Context) {
 	}
 	grup.Nama = data.Nama
 	grup.Masjid = data.Masjid
-	grup.Masjid_lang = data.Masjid_lang
+	grup.Masjid_long = data.Masjid_long
 	grup.Masjid_lat = data.Masjid_lat
 	grup.Alamat = data.Alamat
 	grup.Group_type = data.Group_type
@@ -177,7 +177,7 @@ func (idb *InDB) UpdateGroup(c *gin.Context) {
 		// lama = grup
 		grup.Nama = data.Nama
 		grup.Masjid = data.Masjid
-		grup.Masjid_lang = data.Masjid_lang
+		grup.Masjid_long = data.Masjid_long
 		grup.Masjid_lat = data.Masjid_lat
 		grup.Alamat = data.Alamat
 		grup.Group_type = data.Group_type
