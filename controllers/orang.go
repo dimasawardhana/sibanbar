@@ -3,7 +3,7 @@ package controllers
 import (
 	"net/http"
 	"time"
-
+	"strings"
 	"github.com/dimasawardhana/sibanbar/structs"
 	"github.com/gin-gonic/gin"
 )
@@ -48,17 +48,38 @@ func (idb *InDB) GetOrang(c *gin.Context) {
 		orang2 []structs.Orang
 		result gin.H
 		data   dataJSON
-		orang  structs.Orang
+		// orang  structs.Orang
 	)
+	var query = []string{}
+	var values = []interface{}{}
 	// id := c.Param("id")
 	if err := c.BindQuery(&data); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 	}
-	orang.Alamat = data.Alamat
-	orang.Nama_lengkap = data.Nama_lengkap
-	orang.Status = data.Status
-	orang.KelompokID = data.KelompokID
-	idb.DB.Preload("Kelompok").Where(&orang).Find(&orang2)
+	if data.Alamat != ""{
+		query = append(query, "Alamat LIKE ?")
+		values = append(values, data.Alamat)
+		}
+	if data.Nama_lengkap != ""{
+		query = append(query, "Nama_lengkap LIKE ?")
+		values = append(values, data.Nama_lengkap)
+		}
+	if data.Status != ""{
+		query = append(query, "Status = ?")
+		values = append(values, data.Status)
+		}
+	if data.KelompokID != 0{
+		query = append(query, "KelompokID = ?")
+		values = append(values, data.KelompokID)
+		}
+	// orang.Alamat = data.Alamat
+	// orang.Nama_lengkap = data.Nama_lengkap
+	// orang.Status = data.Status
+	// orang.KelompokID = data.KelompokID
+	idb.DB.Preload("Kelompok").
+	// Where(&orang).
+	Where(strings.Join(query, " AND "), values...).
+	Find(&orang2)
 	if len(orang2) <= 0 {
 		result = gin.H{
 			"status": STATUS_FAILED,
@@ -225,3 +246,4 @@ func (idb *InDB) DebugAPI(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, result)
 }
+
